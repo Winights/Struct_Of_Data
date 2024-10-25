@@ -6,7 +6,7 @@
 
 using namespace std;
 
-
+// 1.2
 //i = 0, sum = 0
 //i = 1, sum = 1,1
 //i = 2, sum = 3,52
@@ -28,7 +28,7 @@ void BreakpointsOfFirstTask()
     }
     cout << "Total sum is " << sum << endl;
 }
-
+// 1.2
 //i = 776, sum = 3,2624579394327844
 void BreakpointsOfSecondTask()
 {
@@ -49,6 +49,7 @@ void BreakpointsOfSecondTask()
     cout << "Total sum is " << sum << endl;
 }
 
+// 3.1
 double GetPower(double base, int exponent)
 {
     if (exponent < 0) 
@@ -66,6 +67,7 @@ double GetPower(double base, int exponent)
     return result;
 }
 
+// 3.2
 void DemoGetPower(double base, int exponent)
 {
     if (exponent < 0)
@@ -80,10 +82,11 @@ void DemoGetPower(double base, int exponent)
         result *= base; // Умножаем значение на base exponent раз
     }
 
-    std::cout << "Result: " << result;
+    std::cout <<  base << "^"<< exponent<< "= " << result;
     std::cout << std::endl;
 }
 
+// 3.3
 void RoundToTens(int& value)
 {
     int remainder = value % 10;
@@ -97,6 +100,7 @@ void RoundToTens(int& value)
     }
 }
 
+// 4.4 и 4.5
 void FooFirst(double a)
 {
     cout << "Address of a in Foo(): " << &a << endl;
@@ -106,15 +110,7 @@ void FooFirst(double a)
     cout << "New value of a in Foo(): " << a << endl;
 }
 
-void FooSecond(double& a)
-{
-    cout << "Address of a in Foo(): " << &a << endl;
-    cout << "Value of a in Foo(): " << a << endl;
-
-    a = 15.0;
-    cout << "New value of a in Foo(): " << a << endl;
-}
-
+// 4.7
 void Foo(double* a)
 {
     cout << "Address in pointer: " << a << endl;
@@ -125,6 +121,7 @@ void Foo(double* a)
     cout << "New value in pointer address: " << *a << endl;
 }
 
+// 5.4
 void Sort(double * arr, int size) 
 {
     for (int i = 0; i < 9; i++) 
@@ -141,6 +138,7 @@ void Sort(double * arr, int size)
     }
 }
 
+// 5.5
 int Search(int* arr, int s)
 {
     int k = 0;
@@ -154,6 +152,7 @@ int Search(int* arr, int s)
     return k;
 }
 
+// 5.6
 void Letters(char* arr) 
 {
     for (int i = 0; i < 15; i++) 
@@ -165,6 +164,7 @@ void Letters(char* arr)
     }
 }
 
+// 5.7
 int* MakeRandomArray(int arraySize)
 {
     int* arr = new int[arraySize];
@@ -184,6 +184,7 @@ void ShowArray(int* arr, int arraySize)
     cout << endl;
 }
 
+// 5.8
 int* ReadArray(int count)
 {
     int* values = new int[count];
@@ -207,6 +208,7 @@ int CountPositiveValues(int* values, int count)
     return result;
 }
 
+// 6
 struct Person
 {
     string FirstName;
@@ -269,7 +271,6 @@ void ClearPeople(Person** people, int itemsCount)
     delete[] people;
 }
 
-//! \brief Задание 1. Поиск человека по фамилии.
 void Task1_FindPersonByLastName()
 {
     Person * *people = CreatePeopleArray();
@@ -311,397 +312,374 @@ void Task1_FindPersonByLastName()
 
 int main()
 {
+    //// 2.1
+    //int arrayOfInt[] = { 78, -9, 456, -34, 0, 12, 555, -678, 123, -1 };
 
-    int arrayOfInt[] = { 78, -9, 456, -34, 0, 12, 555, -678, 123, -1 };
+    //std::cout << "Unsorted array: ";
+    //for (int i = 0; i < 10; i++) 
+    //{
+    //    std::cout << arrayOfInt[i] << " ";
+    //}
+    //std::cout << std::endl;
 
-    std::cout << "Unsorted array: ";
-    for (int i = 0; i < 10; i++) 
+
+    //for (int i = 0; i < 9; i++) 
+    //{
+    //    for (int j = 0; j < 9 - i; j++) 
+    //    {
+    //        if (arrayOfInt[j] > arrayOfInt[j + 1]) 
+    //        {
+    //            int temp = arrayOfInt[j];
+    //            arrayOfInt[j] = arrayOfInt[j + 1];
+    //            arrayOfInt[j + 1] = temp;
+    //        }
+    //    }
+    //}
+
+    //std::cout << "Sorted array: ";
+    //for (int i = 0; i < 10; i++) 
+    //{
+    //    std::cout << arrayOfInt[i] << " ";
+    //}
+    //std::cout << std::endl;
+
+    //// 2.2
+    //double arrayOfDouble[12] = { 3.14, 2.71, 1.62, 0.57, 4.20, 6.66, 9.81, 1.41, 2.81, 5.12, 7.22, 8.33 };
+
+    //std::cout << "Array of double: ";
+    //for (int i = 0; i < 12; i++) 
+    //{
+    //    std::cout << arrayOfDouble[i] << " ";
+    //}
+    //std::cout << std::endl;
+
+    //double searchingValue;
+    //std::cout << "Enter value for searchingValue: ";
+    //std::cin >> searchingValue;
+
+    //int countOfArray = 0;
+    //for (int i = 0; i < 12; i++) 
+    //{
+    //    if (arrayOfDouble[i] >= searchingValue) 
+    //    {
+    //        countOfArray++;
+    //    }
+    //}
+
+    //std::cout << "Number of elements greater than or equal to " << searchingValue << ": " << countOfArray << std::endl;
+
+    //// 2.3
+    //char charArray[8];
+
+    //std::cout << "Enter 8 of symbols: ";
+    //for (int i = 0; i < 8; i++) 
+    //{
+    //    std::cin >> charArray[i];
+    //}
+
+    //std::cout << "Array: ";
+    //for (int i = 0; i < 8; i++) 
+    //{
+    //    std::cout << charArray[i] << " ";
+    //}
+    //std::cout << std::endl;
+
+    //std::cout << "Letters of 'a' to 'z' in array: ";
+    //for (int i = 0; i < 8; i++) 
+    //{
+    //    if (islower(charArray[i]) | isupper(charArray[i])) 
+    //    { 
+    //        std::cout << charArray[i] << " ";
+    //    }
+    //}
+    //std::cout << std::endl;
+
+    //// 3.1
+   
+
+    //std::cout << "Result: " << GetPower(base, exponent);
+    //std::cout << std::endl;
+
+    // 3.2
+    /*for (int i = 0; i < 3; i++)
     {
-        std::cout << arrayOfInt[i] << " ";
-    }
-    std::cout << std::endl;
+        double base;
+        std::cout << "Enter number: ";
+        std::cin >> base;
 
+        int exponent;
+        std::cout << "Enter exponent for number: ";
+        std::cin >> exponent;
 
-    for (int i = 0; i < 9; i++) 
-    {
-        for (int j = 0; j < 9 - i; j++) 
-        {
-            if (arrayOfInt[j] > arrayOfInt[j + 1]) 
-            {
-                int temp = arrayOfInt[j];
-                arrayOfInt[j] = arrayOfInt[j + 1];
-                arrayOfInt[j + 1] = temp;
-            }
-        }
-    }
+        DemoGetPower(base, exponent);
+    }*/
+   
 
-    std::cout << "Sorted array: ";
-    for (int i = 0; i < 10; i++) 
-    {
-        std::cout << arrayOfInt[i] << " ";
-    }
-    std::cout << std::endl;
+    //// 3.3
+    //int f;
+    //int testValues[] = { 12, 187, 27, 85, 46, 99 };
 
+    //for (int value : testValues)
+    //{
+    //    f = value;
+    //    std::cout << "Исходное значение: " << f << std::endl;
 
-    double arrayOfDouble[12] = { 3.14, 2.71, 1.62, 0.57, 4.20, 6.66, 9.81, 1.41, 2.81, 5.12, 7.22, 8.33 };
+    //    RoundToTens(f);
+    //    std::cout << "Округленное значение: " << f << std::endl << std::endl;
+    //}
 
-    std::cout << "Array of double: ";
-    for (int i = 0; i < 12; i++) 
-    {
-        std::cout << arrayOfDouble[i] << " ";
-    }
-    std::cout << std::endl;
-
-    double searchingValue;
-    std::cout << "Enter value for searchingValue: ";
-    std::cin >> searchingValue;
-
-    int countOfArray = 0;
-    for (int i = 0; i < 12; i++) 
-    {
-        if (arrayOfDouble[i] >= searchingValue) 
-        {
-            countOfArray++;
-        }
-    }
-
-    std::cout << "Number of elements greater than or equal to " << searchingValue << ": " << countOfArray << std::endl;
-
-
-    char charArray[8];
-
-    std::cout << "Enter 8 of symbols: ";
-    for (int i = 0; i < 8; i++) 
-    {
-        std::cin >> charArray[i];
-    }
-
-    std::cout << "Array: ";
-    for (int i = 0; i < 8; i++) 
-    {
-        std::cout << charArray[i] << " ";
-    }
-    std::cout << std::endl;
-
-    std::cout << "Letters of 'a' to 'z' in array: ";
-    for (int i = 0; i < 8; i++) 
-    {
-        if (islower(charArray[i]) | isupper(charArray[i])) 
-        { 
-            std::cout << charArray[i] << " ";
-        }
-    }
-    std::cout << std::endl;
-
-
-    double base;
-    std::cout << "Enter number: ";
-    std::cin >> base;
-
-    int exponent;
-    std::cout << "Enter exponent for number: ";
-    std::cin >> exponent;
-
-    std::cout << "Result: " << GetPower(base, exponent);
-    std::cout << std::endl;
-
-    DemoGetPower(base, exponent);
-
-    int f;
-    int testValues[] = { 12, 187, 27, 85, 46, 99 };
-
-    for (int value : testValues)
-    {
-        f = value;
-        std::cout << "Исходное значение: " << f << std::endl;
-
-        RoundToTens(f);
-        std::cout << "Округленное значение: " << f << std::endl << std::endl;
-    }
-
-    int a = 5;
-    int b = 4;
-    cout << "Address of a: " << &a << endl;
-    cout << "Address of b: " << &b << endl;
-    
-    double c = 13.5;
-    cout << "Address of c: " << &c << endl;
+    //// 4.1
+    //int a = 5;
+    //int b = 4;
+    //cout << "Address of a: " << &a << endl;
+    //cout << "Address of b: " << &b << endl;
+    //
+    //double c = 13.5;
+    //cout << "Address of c: " << &c << endl;
  
-    bool d = true;
-    cout << "Address of d: " << &d << endl;
+    //bool d = true;
+    //cout << "Address of d: " << &d << endl;
 
+    //// 4.2
+    //int g[10] = { 1, 2, 7, -1, 5, 3, -1, 7, 1, 6 };
+    //cout << "Size of int type: " << sizeof(int) << endl;
 
-    int g[10] = { 1, 2, 7, -1, 5, 3, -1, 7, 1, 6 };
-    cout << "Size of int type: " << sizeof(int) << endl;
+    //for (int i = 0; i < 10; i++)
+    //{
+    //    cout << "Address of g[" << i << "]: " << &g[i] << endl;
+    //}
 
-    for (int i = 0; i < 10; i++)
-    {
-        cout << "Address of a[" << i << "]: " << &g[i] << endl;
-    }
+    //cout << endl;
+    //cout << "Size of double type: " << sizeof(double) << endl;
+    //double j[10] = { 1.0, 2.0, 7.0, -1.0, 5.0, 3.5, -1.8, 7.2, 1.9, 6.2 };
+    //for (int i = 0; i < 10; i++)
+    //{
+    //    cout << "Address of j[" << i << "]: " << &j[i] << endl;
+    //}
 
-    cout << endl;
-    cout << "Size of double type: " << sizeof(double) << endl;
-    double j[10] = { 1.0, 2.0, 7.0, -1.0, 5.0, 3.5, -1.8, 7.2, 1.9, 6.2 };
-    for (int i = 0; i < 10; i++)
-    {
-        cout << "Address of b[" << i << "]: " << &j[i] << endl;
-    }
-
-    int n = 5;
-    int& m = a;
+    //// 4.3
+    /*int n = 5;
+    int& m = n;
 
     cout << "Address of n: " << &n << endl;
-    cout << "Address of a: " << &m << endl;
+    cout << "Address of n: " << &m << endl;
 
 
     cout << endl;
     m = 7;
-    cout << "Value of n: " << n << endl;
+    cout << "Value of n: " << n << endl;*/
 
-
-    double q = 5.0;
-    cout << "Address of q in main(): " << &q << endl;
-    cout << "Value of q in main(): " << q << endl;
-    cout << endl;
+    //// 4.4
+    //double q = 5.0;
+    //cout << "Address of q in main(): " << &q << endl;
+    //cout << "Value of q in main(): " << q << endl;
+    //cout << endl;
    
-    FooSecond(q);
+    //FooFirst(q);
 
-    cout << endl;
-    cout << "Value of q in main(): " << q << endl;
+    //cout << endl;
+    //cout << "Value of q in main(): " << q << endl;
 
-
-    double y = 5.0;
-    cout << "Address of y in main(): " << &y << endl;
-    cout << "Value of y in main(): " << y << endl;
-    cout << endl;
+    //// 4.5
+    //double y = 5.0;
+    //cout << "Address of y in main(): " << &y << endl;
+    //cout << "Value of y in main(): " << y << endl;
+    //cout << endl;
    
-    FooSecond(y);
+    //FooFirst(y);
 
-    cout << endl;
-    cout << "Value of y in main(): " << y << endl;
+    //cout << endl;
+    //cout << "Value of y in main(): " << y << endl;
 
+    //// 4.6
+    //int i = 5;
+    //int* newPointer = &i;
 
-    int i = 5;
-    int* newPointer = &i;
+    //cout << "Address of i: " << &i << endl;
+    //cout << "Address in newPointer: " << newPointer << endl;
+    //cout << "Address of newPointer: " << &newPointer << endl;
 
-    cout << "Address of i: " << &i << endl;
-    cout << "Address in pointer: " << newPointer << endl;
-    cout << "Address of pointer: " << &newPointer << endl;
+    //cout << endl;
+    //*newPointer = 7;
+    //cout << "Value in i: " << a << endl;
+    //cout << "Value by newPointer address: " << *newPointer << endl;
 
-    cout << endl;
-    *newPointer = 7;
-    cout << "Value in i: " << a << endl;
-    cout << "Value by pointer address: " << *newPointer << endl;
+    //// 4.7
+    //double value = 5.0;
+    //double* pointer = &value;
+    //cout << "Address of value in main(): " << &value << endl;
+    //cout << "Address in pointer in main(): " << pointer << endl;
+    //cout << "Address of pointer in main(): " << &pointer << endl;
+    //cout << "Value of a in main(): " << value << endl;
+    //cout << endl;
 
+    //Foo(pointer);
 
-    double value = 5.0;
-    double* pointer = &value;
-    cout << "Address of value in main(): " << &value << endl;
-    cout << "Address in pointer in main(): " << pointer << endl;
-    cout << "Address of pointer in main(): " << &pointer << endl;
-    cout << "Value of a in main(): " << value << endl;
-    cout << endl;
+    //cout << endl;
+    //cout << "Value of a in main(): " << value << endl;
 
-    Foo(pointer);
+    //// 5.1
+    //double* newArrayDouble = new double[8];
+    //newArrayDouble[0] = 1.0;
+    //newArrayDouble[1] = 15.0;
+    //newArrayDouble[2] = -8.2;
+    //newArrayDouble[3] = -3.5;
+    //newArrayDouble[4] = 12.6;
+    //newArrayDouble[5] = 38.4;
+    //newArrayDouble[6] = -0.5;
+    //newArrayDouble[7] = 4.5;
+    //
+    //cout << "Array of double:" << endl;
+    //for (int i = 0; i < 8; i++) 
+    //{
+    //      cout << newArrayDouble[i] << " ";
+    //}
+    //cout << endl;
 
-    cout << endl;
-    cout << "Value of a in main(): " << value << endl;
+    //delete[] newArrayDouble;
+    //
+    //// 5.2
+    //bool* arrayOfBool = new bool[8];
+    //arrayOfBool[0] = true;
+    //arrayOfBool[1] = false;
+    //arrayOfBool[2] = true;
+    //arrayOfBool[3] = true;
+    //arrayOfBool[4] = false;
+    //arrayOfBool[5] = true;
+    //arrayOfBool[6] = false;
+    //arrayOfBool[7] = false;
 
+    //cout << "Array of bool:" << endl;
+    //for (int i = 0; i < 8; i++) 
+    //{
+    //cout << boolalpha <<arrayOfBool[i] << " "; // ?
+    //}
+    //cout << endl;
 
-    double* newArrayDouble = new double[8];
-    newArrayDouble[0] = 1.0;
-    newArrayDouble[1] = 15.0;
-    newArrayDouble[2] = -8.2;
-    newArrayDouble[3] = -3.5;
-    newArrayDouble[4] = 12.6;
-    newArrayDouble[5] = 38.4;
-    newArrayDouble[6] = -0.5;
-    newArrayDouble[7] = 4.5;
-    
-    cout << "Array of double:" << endl;
-    for (int i = 0; i < 8; i++) 
-    {
-          cout << newArrayDouble[i] << " ";
-    }
-    cout << endl;
+    //delete[] arrayOfBool;
 
-    delete[] newArrayDouble;
-    
+    //// 5.3
+    //int p; cout << "enter n: "; cin >> p;
+    //char* arrayOfChar = new char[p];
+    //cout << "enter " << p << " characters: " << endl;
+    //for (int i = 0; i < p; i++) 
+    //{
+    //	cin >> arrayOfChar[i];
+    //}
 
-    bool* arrayOfBool = new bool[8];
-    arrayOfBool[0] = true;
-    arrayOfBool[1] = false;
-    arrayOfBool[2] = true;
-    arrayOfBool[3] = true;
-    arrayOfBool[4] = false;
-    arrayOfBool[5] = true;
-    arrayOfBool[6] = false;
-    arrayOfBool[7] = false;
+    //cout << "array of characters: ";
+    //for (int i = 0; i < p; i++) 
+    //{
+    //		cout << arrayOfChar [i] << " ";
+    //}
+    //delete[] arrayOfChar; 
 
-    cout << "Array of bool:" << endl;
-    for (int i = 0; i < 8; i++) 
-    {
-    cout << boolalpha <<arrayOfBool[i] << " "; // ?
-    }
-    cout << endl;
+    // 5.4
+    //double* arrayOfDoublesForSort = new double[10];
 
-    delete[] arrayOfBool;
+    //arrayOfDoublesForSort[0] = 1.0;
+    //arrayOfDoublesForSort[1] = 15.0;
+    //arrayOfDoublesForSort[2] = -8.2;
+    //arrayOfDoublesForSort[3] = -3.5;
+    //arrayOfDoublesForSort[4] = 12.6;
+    //arrayOfDoublesForSort[5] = 38.4;
+    //arrayOfDoublesForSort[6] = -0.5;
+    //arrayOfDoublesForSort[7] = 4.5;
+    //arrayOfDoublesForSort[8] = 39.8;
+    //arrayOfDoublesForSort[9] = -6.5;
 
+    //cout << "Array of double:" << endl;
+    //for (int i = 0; i < 10; i++)
+    //{
+    //    cout << arrayOfDoublesForSort[i] << " ";
+    //}
 
-    int p; cout << "enter n: "; cin >> p;
-    char* arrayOfChar = new char[p];
-    cout << "enter " << p << " characters: " << endl;
-    for (int i = 0; i < p; i++) 
-    {
-    	cin >> arrayOfChar[i];
-    }
+    //cout << endl;
+    //cout << "Sorted array: ";
+    //Sort(arrayOfDoublesForSort, 10);
+    //for (int i = 0; i < 10; i++) 
+    //{
+    //    cout << arrayOfDoublesForSort[i] << " ";
+    //}
 
-    cout << "array of characters: ";
-    for (int i = 0; i < p; i++) 
-    {
-    		cout << arrayOfChar [i] << " ";
-    }
-    delete[] arrayOfChar; 
+    //delete[] arrayOfDoublesForSort;
 
-    double* arrayOfDoublesForSort = new double[10];
+    //// 5.5
+    //int* newArrayOfInt = new int[10];
+    //newArrayOfInt[0] = 1;
+    //newArrayOfInt[1] = 15;
+    //newArrayOfInt[2] = -8;
+    //newArrayOfInt[3] = -3;
+    //newArrayOfInt[4] = 12;
+    //newArrayOfInt[5] = 38;
+    //newArrayOfInt[6] = 0;
+    //newArrayOfInt[7] = 4;
+    //newArrayOfInt[8] = 39;
+    //newArrayOfInt[9] = -6;
 
-    arrayOfDoublesForSort[0] = 1.0;
-    arrayOfDoublesForSort[1] = 15.0;
-    arrayOfDoublesForSort[2] = -8.2;
-    arrayOfDoublesForSort[3] = -3.5;
-    arrayOfDoublesForSort[4] = 12.6;
-    arrayOfDoublesForSort[5] = 38.4;
-    arrayOfDoublesForSort[6] = -0.5;
-    arrayOfDoublesForSort[7] = 4.5;
-    arrayOfDoublesForSort[8] = 39.8;
-    arrayOfDoublesForSort[9] = -6.5;
+    //cout << "Enter searching value: "; int s; cin >> s;
+    //int k = Search(newArrayOfInt, s);
+    //cout << k;
+    //delete[] newArrayOfInt;
 
+    //// 5.6
+    //char* newArrayOfChar = new char[15];
+    //newArrayOfChar[0] = 'd';
+    //newArrayOfChar[1] = 'u';
+    //newArrayOfChar[2] = 'f';
+    //newArrayOfChar[3] = 'a';
+    //newArrayOfChar[4] = '9';
+    //newArrayOfChar[5] = '4';
+    //newArrayOfChar[6] = ';';
+    //newArrayOfChar[7] = 't';
+    //newArrayOfChar[8] = 'e';
+    //newArrayOfChar[9] = 'w';
+    //newArrayOfChar[10] = '[';
+    //newArrayOfChar[11] = '6';
+    //newArrayOfChar[12] = '2';
+    //newArrayOfChar[13] = '5';
+    //newArrayOfChar[14] = '1';
+    //cout << "your array: " << endl;
+    //for (int i = 0; i < 15; i++) 
+    //{
+    //		cout << newArrayOfChar[i] << " ";
+    //}
+    //cout << endl << "letters in the array: " << endl;
+    //Letters(newArrayOfChar);
+    //delete[]newArrayOfChar;
 
-    cout << "Array of double:" << endl;
-    for (int i = 0; i < 10; i++)
-    {
-        cout << arrayOfDoublesForSort[i] << " ";
-    }
+    //// 5.7
+    //srand(time(0));
+    //int* arr5 = MakeRandomArray(5);
+    //int* arr8 = MakeRandomArray(8);
+    //int* arr13 = MakeRandomArray(13);
+    //
+    //cout << "Random array of 5: ";
+    //ShowArray(arr5, 5);
 
-    cout << endl;
-    cout << "Sorted array: ";
-    Sort(arrayOfDoublesForSort, 10);
-    for (int i = 0; i < 10; i++) 
-    {
-        cout << arrayOfDoublesForSort[i] << " ";
-    }
+    //cout << "Random array of 8: ";
+    //ShowArray(arr8, 8);
 
-    delete[] arrayOfDoublesForSort;
+    //cout << "Random array of 13: ";
+    //ShowArray(arr13, 13);
 
+    //delete[] arr5;
+    //delete[] arr8;
+    //delete[] arr13;
 
-    int* newArrayOfInt = new int[10];
-    newArrayOfInt[0] = 1;
-    newArrayOfInt[1] = 15;
-    newArrayOfInt[2] = -8;
-    newArrayOfInt[3] = -3;
-    newArrayOfInt[4] = 12;
-    newArrayOfInt[5] = 38;
-    newArrayOfInt[6] = 0;
-    newArrayOfInt[7] = 4;
-    newArrayOfInt[8] = 39;
-    newArrayOfInt[9] = -6;
+    //// 6
+    //Task1_FindPersonByLastName();
 
-    cout << "Enter searching value: "; int s; cin >> s;
-    int k = Search(newArrayOfInt, s);
-    cout << k;
-    delete[] newArrayOfInt;
+    //// 5.8
+    //int count = 15;
+    //int* values = ReadArray(count);
+    //std::cout << "Count is: " << CountPositiveValues(values, count) << std::endl;
+    //delete[] values; // we need to clear the heap 2 times
 
-
-    char* newArrayOfChar = new char[15];
-    newArrayOfChar[0] = 'd';
-    newArrayOfChar[1] = 'u';
-    newArrayOfChar[2] = 'f';
-    newArrayOfChar[3] = 'a';
-    newArrayOfChar[4] = '9';
-    newArrayOfChar[5] = '4';
-    newArrayOfChar[6] = ';';
-    newArrayOfChar[7] = 't';
-    newArrayOfChar[8] = 'e';
-    newArrayOfChar[9] = 'w';
-    newArrayOfChar[10] = '[';
-    newArrayOfChar[11] = '6';
-    newArrayOfChar[12] = '2';
-    newArrayOfChar[13] = '5';
-    newArrayOfChar[14] = '1';
-    cout << "your array: " << endl;
-    for (int i = 0; i < 15; i++) 
-    {
-    		cout << newArrayOfChar[i] << " ";
-    }
-    cout << endl << "letters in the array: " << endl;
-    Letters(newArrayOfChar);
-    delete[]newArrayOfChar;
-
-
-    srand(time(0));
-    int* arr5 = MakeRandomArray(5);
-    int* arr8 = MakeRandomArray(8);
-    int* arr13 = MakeRandomArray(13);
-    
-    cout << "Random array of 5: ";
-    ShowArray(arr5, 5);
-
-    cout << "Random array of 8: ";
-    ShowArray(arr8, 8);
-
-    cout << "Random array of 13: ";
-    ShowArray(arr13, 13);
-
-    delete[] arr5;
-    delete[] arr8;
-    delete[] arr13;
-
-
-    Person** people = CreatePeopleArray();
-    for (int i = 0; i < PeopleCount; i++)
-    {
-        WritePerson(*people[i]);
-    }
-
-    std::string lastName;
-    std::cout << "Enter last name: ";
-    std::cin >> lastName;
-    int foundIndex = -1;
-
-    for (int i = 0; i < PeopleCount; i++)
-    {
-        if (people[i]->LastName == lastName)
-        {
-            foundIndex = i;
-            break; // Выходим из цикла после нахождения
-        }
-    }
-
-    if (foundIndex == -1)
-    {
-        std::cout << "Could not find a person by last name: " << lastName << std::endl;
-    }
-    else
-    {
-        std::cout << "A person's last name "
-            << lastName
-            << " was found. Its index in the array is "
-            << foundIndex
-            << std::endl;
-    }
-
-    ClearPeople(people, PeopleCount);
-
-
-    int count = 15;
-    int* values = ReadArray(count);
-    std::cout << "Count is: " << CountPositiveValues(values, count) << std::endl;
-    delete[] values; // we need to clear the heap 2 times
-
-    count = 20;
-    values = ReadArray(count);
-    std::cout << "Count is: " << CountPositiveValues(values, count) << std::endl;
-    delete[] values;
+    //count = 20;
+    //values = ReadArray(count);
+    //std::cout << "Count is: " << CountPositiveValues(values, count) << std::endl;
+    //delete[] values;
 
     return 0;
 }
