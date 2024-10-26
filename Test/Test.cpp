@@ -4,40 +4,53 @@
 #include <iostream>
 #include <string>
 
-int* ReadArray(int count) 
-{
-    int* values = new int[count];
-    for (int i = 0; i < count; i++) 
-    {
-        std::cin >> values[i];
-    }
-    return values;
-}
+class Node {
+public:
+    double data;
+    Node* prev, * next;
 
-int CountPositiveValues(int* values, int count) 
-{
-    int result = 0;
-    for (int i = 0; i < count; i++) 
-    {
-        if (values[i] > 0) 
-        {
-            result++;
-        }
+public:
+    Node(double data) {
+        this->data = data;
+        this->prev = this->next = NULL;
     }
-       return result;
-}
+};
+
+class LinkedList {
+public:
+    Node* head, * tail;
+
+public:
+    LinkedList() {
+        this->head = this->tail = NULL;
+    }
+    Node* push_back(double data)
+    {
+        Node* ptr = new Node(data);
+
+        ptr->prev = tail;
+        if (tail != NULL)
+            tail->next = ptr;
+        if (head == NULL)
+            head = ptr;
+        tail = ptr;
+
+        return ptr;
+    }
+};
+
+
 
 int main() 
 {
-    int count = 15;
-    int* values = ReadArray(count);
-    std::cout << "Count is: " << CountPositiveValues(values, count) << std::endl;
-    delete[] values; // we need to clear the heap 2 times
+    LinkedList list;
+    list.push_back(3);
+    list.push_back(3);
+    list.push_back(3);
 
-    count = 20;
-    values = ReadArray(count);
-    std::cout << "Count is: " << CountPositiveValues(values, count) << std::endl;
-    delete[] values; 
+    for (Node* ptr = list.head; ptr != NULL; ptr = ptr->next)
+        std::cout << ptr->data << " ";
+    std::cout << std::endl;
 
     return 0;
 }

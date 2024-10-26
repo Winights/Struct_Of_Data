@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DynamicList.cpp" />
     <ClCompile Include="Labatory_work_2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DynamicList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
