@@ -17,13 +17,13 @@ int GetInput(const string& prompt)
 
 int main()
 {
-    DynamicArray* Array = CreateDynamicArray();
+    DynamicArray* dynamicArray = CreateDynamicArray();
 
     cout << "Current array \n";
 
-    InitializationDynamicArray(Array);
+    InitializationDynamicArray(dynamicArray);
 
-    PrintArray(Array);
+    PrintArray(dynamicArray);
 
     while (true)
     {
@@ -44,10 +44,9 @@ int main()
         case 1:
         {
             int index = GetInput("Enter the index to delete: ");
-            //TODO: insert to function remove duplication
             cout << endl;
-            RemoveByIndex(Array, index);
-            PrintArray(Array);
+            RemoveByIndex(dynamicArray, index);
+            PrintArray(dynamicArray);
             cout << endl;
             break;
         }
@@ -55,8 +54,8 @@ int main()
         {
             int value = GetInput("Enter the value to delete: ");
             cout << endl;
-            RemoveByValue(Array, value);
-            PrintArray(Array);
+            RemoveByValue(dynamicArray, value);
+            PrintArray(dynamicArray);
             cout << endl;
             break;
         }
@@ -64,8 +63,8 @@ int main()
         {
             int value = GetInput("Enter the element to insert it at the beginning: ");
             cout << endl;
-            AddElement(Array, 0, value);
-            PrintArray(Array);
+            AddElement(dynamicArray, 0, value);
+            PrintArray(dynamicArray);
             cout << endl;
             break;
         }
@@ -73,8 +72,8 @@ int main()
         {
             int value = GetInput("Enter the element to inset it at the end: ");
             cout << endl;
-            AddElement(Array, Array->Size, value);
-            PrintArray(Array);
+            AddElement(dynamicArray, dynamicArray->Size, value);
+            PrintArray(dynamicArray);
             cout << endl;
             break;
         }
@@ -83,16 +82,16 @@ int main()
             int index = GetInput("Enter the index where you want to insert the value: ");
             int value = GetInput("Enter the value you want to insert: ");
             cout << endl;
-            AddElement(Array, index, value);
-            PrintArray(Array);
+            AddElement(dynamicArray, index, value);
+            PrintArray(dynamicArray);
             cout << endl;
             break;
         }
         case 6:
         {
-            SortArray(Array);
+            SortArray(dynamicArray);
             cout << "Array is sorted " << endl;
-            PrintArray(Array);
+            PrintArray(dynamicArray);
             cout << endl;
             break;
         }
@@ -100,8 +99,8 @@ int main()
         {
             int value = GetInput("Enter the value you want to find in the array: ");
             cout << endl;
-            LinerSearch(Array, value);
-            PrintArray(Array);
+            LinerSearch(dynamicArray, value);
+            PrintArray(dynamicArray);
             cout << endl;
             break;
         }
@@ -109,8 +108,8 @@ int main()
         {
             int value = GetInput("Enter the value you want to find in the array: ");
             cout << endl;
-            BinarySearch(Array, value);
-            PrintArray(Array);
+            BinarySearch(dynamicArray, value);
+            PrintArray(dynamicArray);
             cout << endl;
             break;
         }
@@ -118,7 +117,7 @@ int main()
             cout << "Unknown command. Try entering the command again";
         }
     }
-    FreeArray(Array);
+    FreeArray(dynamicArray);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

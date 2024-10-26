@@ -72,37 +72,6 @@ void AddElement(DynamicArray* array, int index, int value)
 	array->Size++;
 }
 
-//void InsetAfterDefiniteElement(DynamicArray* array, int value, int afterValue)
-//{
-//	if (array->Size >= array->Capacity)
-//	{
-//		ResizeArray(array, array->Capacity * growthFactor);
-//	}
-//
-//	bool found = false;
-//
-//	for (int i = 0; i < array->Size; i++)
-//	{
-//		if (array->Array[i] == afterValue)
-//		{
-//			found = true;
-//			for (int j = array->Size; j > i + 1; j--)
-//			{
-//				array->Array[j] = array->Array[j - 1];
-//			}
-//		}
-//		array->Array[i + 1] = value;
-//		array->Size++;
-//		break;
-//	}
-//
-//	if (!found)
-//	{
-//		cout << "Element" << afterValue << "not found in array\n";
-//	}
-//
-//}
-
 void RemoveByIndex(DynamicArray* array, int index)
 {
 	bool flagCheckRange = CheckRange(array, index);
