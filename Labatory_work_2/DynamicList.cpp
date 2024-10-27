@@ -167,18 +167,33 @@ void RemoveByIndex(LinkedList* list, int index)
     delete node;
 }
 
+/// <summary>
+/// Объединяет две части в один список.
+/// </summary>
+/// <param name="left">Указатель на левую часть списка.</param>
+/// <param name="right">Указатель на правую часть списка.</param>
+/// <returns>Возвращает указатель на узел, который является головой объединенного отсортированного списка.</returns>
 Node* Merge(Node* left, Node* right) 
 {
-    if (!left) return right;
-    if (!right) return left;
+    if (!left)
+    {
+        return right;
+    }
+    
+    if (!right)
+    {
+        return left;
+    }
 
-    if (left->Data < right->Data) {
+    if (left->Data < right->Data) 
+    {
         left->Next = Merge(left->Next, right);
         left->Next->Prev = left;
         left->Prev = nullptr;
         return left;
     }
-    else {
+    else 
+    {
         right->Next = Merge(left, right->Next);
         right->Next->Prev = right;
         right->Prev = nullptr;
@@ -186,25 +201,42 @@ Node* Merge(Node* left, Node* right)
     }
 }
 
+/// <summary>
+/// Делит список на две части.
+/// </summary>
+/// <param name="head">Указатель на узел, который является головой в списке.</param>
+/// <returns>Возвращает указатель на вторую половину списка, разделенного по середине.</returns>
 Node* Split(Node* head) 
 {
     Node* slow = head;
     Node* fast = head->Next;
 
-    while (fast && fast->Next) {
+    while (fast && fast->Next)
+    {
         slow = slow->Next;
         fast = fast->Next->Next;
     }
 
     Node* temp = slow->Next;
     slow->Next = nullptr;
-    if (temp) temp->Prev = nullptr;
+    if (temp)
+    {
+        temp->Prev = nullptr;
+    }
     return temp;
 }
 
+/// <summary>
+/// Рекурсивно сортирует список.
+/// </summary>
+/// <param name="head">Узел начального элемента в списке.</param>
+/// <returns>Возвращает указатель на отсортированный список.</returns>
 Node* MergeSort(Node* head) 
 {
-    if (!head || !head->Next) return head;
+    if (!head || !head->Next)
+    {
+        return head;
+    }
 
     Node* secondHalf = Split(head);
     head = MergeSort(head);
