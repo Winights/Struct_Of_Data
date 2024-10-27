@@ -44,6 +44,12 @@ struct LinkedList
 LinkedList* CreateDynamicList();
 
 /// <summary>
+/// Инциализация списка случайными значениями.
+/// </summary>
+/// <param name="array">Структура двухсвязного списка.</param>
+void InitializationLinkedList(LinkedList* list);
+
+/// <summary>
 /// Добавление элемента в начало списка.
 /// </summary>
 /// <param name="list">Структура двухсвязного списка.</param>

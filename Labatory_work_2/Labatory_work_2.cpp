@@ -2,8 +2,9 @@
 //
 
 #include <iostream>
-#include "DynamicList.h"
+#include "LinkedList.h"
 #include <string>
+#include <chrono>
 
 using namespace std;
 
@@ -25,11 +26,15 @@ int main()
     LinkedList* linkedList = CreateDynamicList();
 
     cout << "Current list \n";
+    InitializationLinkedList(linkedList);
+    cout << endl;
+    PrintList(linkedList);
+    cout << endl;
 
     while (true)
     {
         cout << "Select the action you want to do: \n";
-        cout << "1. Remove an element by index from an array \n";
+        cout << "1. Remove an element by index from an list \n";
         cout << "2. Insert an element at the beginning \n";
         cout << "3. Insert an element at the end \n";
         cout << "4. Insert after a certain element \n";
@@ -44,7 +49,12 @@ int main()
         {
             int index = GetInput("Enter the index to delete: ");
             cout << endl;
+            auto start = std::chrono::high_resolution_clock::now();
             RemoveByIndex(linkedList, index);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double, std::milli> elapsed = end - start;
+
+            cout << "Elapsed time (ms): " << elapsed.count() << " ms" << endl;
             PrintList(linkedList);
             cout << endl;
             break;
@@ -60,9 +70,11 @@ int main()
         }
         case 3:
         {
-            int value = GetInput("Enter the element to inset it at the end: ");
+            int value = GetInput("Enter the element to insert it at the end: ");
             cout << endl;
             AddToEnd(linkedList, value);
+            
+            cout << endl;
             PrintList(linkedList);
             cout << endl;
             break;
@@ -72,6 +84,7 @@ int main()
             int index = GetInput("Enter the index where you want to insert the value: ");
             int value = GetInput("Enter the value you want to insert: ");
             cout << endl;
+            auto start = std::chrono::high_resolution_clock::now();
             int result = InsertByIndex(linkedList, index, value);
             if (result == 1)
             {
@@ -81,6 +94,10 @@ int main()
             {
                 AddToBegin(linkedList, value);
             }
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double, std::milli> elapsed = end - start;
+
+            cout << "Elapsed time (ms): " << elapsed.count() << " ms" << endl;
             PrintList(linkedList);
             std::cout << std::endl;
             cout << endl;
