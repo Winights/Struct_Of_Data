@@ -62,14 +62,6 @@ bool CheckRange(DynamicArray* array, int index);
 void AddElement(DynamicArray* array, int index, int value);
 
 /// <summary>
-/// Вставка после определенного элемента.
-/// </summary>
-/// <param name="array">Структура динамического массива.</param>
-/// <param name="value">Значение, которое нужно вставить.</param>
-/// <param name="afterValue">Значение, после которго нужно вставить.</param>
-void InsetAfterDefiniteElement(DynamicArray* array, int value, int afterValue);
-
-/// <summary>
 /// Удаление элемента по индексу.
 /// </summary>
 /// <param name="array">Структура динамического массива.</param>

@@ -1,4 +1,4 @@
-#include "DynamicList.h"
+﻿#include "DynamicList.h"
 #include <string>
 #include <iostream>
 
@@ -165,6 +165,57 @@ void RemoveByIndex(LinkedList* list, int index)
     right->Prev = left;
 
     delete node;
+}
+
+Node* Merge(Node* left, Node* right) 
+{
+    if (!left) return right;
+    if (!right) return left;
+
+    if (left->Data < right->Data) {
+        left->Next = Merge(left->Next, right);
+        left->Next->Prev = left;
+        left->Prev = nullptr;
+        return left;
+    }
+    else {
+        right->Next = Merge(left, right->Next);
+        right->Next->Prev = right;
+        right->Prev = nullptr;
+        return right;
+    }
+}
+
+Node* Split(Node* head) 
+{
+    Node* slow = head;
+    Node* fast = head->Next;
+
+    while (fast && fast->Next) {
+        slow = slow->Next;
+        fast = fast->Next->Next;
+    }
+
+    Node* temp = slow->Next;
+    slow->Next = nullptr;
+    if (temp) temp->Prev = nullptr;
+    return temp;
+}
+
+Node* MergeSort(Node* head) 
+{
+    if (!head || !head->Next) return head;
+
+    Node* secondHalf = Split(head);
+    head = MergeSort(head);
+    secondHalf = MergeSort(secondHalf);
+
+    return Merge(head, secondHalf);
+}
+
+void SortList(LinkedList* list)
+{
+    list->Head = MergeSort(list->Head);
 }
 
 void LinerSearch(LinkedList* list, int value)

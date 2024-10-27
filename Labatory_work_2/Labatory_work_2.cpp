@@ -86,20 +86,22 @@ int main()
             cout << endl;
             break;
         }
-        //case 5:
-        //{
-        //    SortArray(dynamicArray);
-        //    cout << "Array is sorted " << endl;
-        //    PrintArray(dynamicArray);
-        //    cout << endl;
-        //    break;
-        //}
+        case 5:
+        {
+            SortList(linkedList);
+            cout << "List is sorted " << endl;
+            cout << endl;
+            PrintList(linkedList);
+            cout << endl;
+            break;
+        }
         case 6:
         {
             int value = GetInput("Enter the value you want to find in the array: ");
             cout << endl;
             LinerSearch(linkedList, value);
             PrintList(linkedList);
+            cout << endl;
             break;
         }
         default:

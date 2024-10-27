@@ -7,6 +7,11 @@
 
 using namespace std;
 
+/// <summary>
+/// Получение значения от пользователя.
+/// </summary>
+/// <param name="prompt">Введенные значения.</param>
+/// <returns>Возвращает число</returns>
 int GetInput(const string& prompt)
 {
     int value;
