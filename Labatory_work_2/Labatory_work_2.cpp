@@ -14,23 +14,23 @@ using namespace std;
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
 /// <returns>Возвращает true, если является числом, иначе false.</returns>
-bool isNumber(const std::string& str) 
+bool isNumber(const std::string& prompt) 
 {
-    if (str.empty())
+    if (prompt.empty())
     {
         return false;
     }
 
     // Проверяем, есть ли знак числа
     size_t start = 0;
-    if (str[0] == '-' || str[0] == '+') 
+    if (prompt[0] == '-' || prompt[0] == '+') 
     {
         start = 1;
     }
 
-    for (size_t i = start; i < str.size(); ++i) 
+    for (size_t i = start; i < prompt.size(); ++i) 
     {
-        if (!isdigit(str[i]))
+        if (!isdigit(prompt[i]))
         {
             return false;
         }
@@ -94,9 +94,7 @@ int main()
             RemoveByIndex(linkedList, index);
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double, std::milli> elapsed = end - start;
-
             cout << "Elapsed time (ms): " << elapsed.count() << " ms" << endl;
-
 
             PrintList(linkedList);
             cout << endl;
@@ -128,14 +126,6 @@ int main()
             cout << endl;
             auto start = std::chrono::high_resolution_clock::now();
             InsertByIndex(linkedList, index, value);
-            /*if (resultInsert == 1)
-            {
-                AddToEnd(linkedList, value);                    
-            }
-            if (resultInsert == 2)
-            {
-                AddToBegin(linkedList, value);
-            }*/
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double, std::milli> elapsed = end - start;
 
