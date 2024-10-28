@@ -6,18 +6,19 @@ using namespace std;
 
 DynamicArray* CreateDynamicArray()
 {
-	DynamicArray* array = new DynamicArray;
+	DynamicArray* dynamicArray = new DynamicArray;
 
-	array->Size = 0;
-	array->Capacity = originalCapacity;
-	array->Array = new int[array->Capacity];
+	dynamicArray->Size = 0;
+	dynamicArray->Capacity = originalCapacity;
+	dynamicArray->Array = new int[dynamicArray->Capacity];
 
-	return array;
+	return dynamicArray;
 }
 
 void InitializationDynamicArray(DynamicArray* array)
 {
 	srand(time(0));
+
 	array->Size = 3;
 
 	for (int i = 0; i < array->Size; i++)
@@ -28,14 +29,14 @@ void InitializationDynamicArray(DynamicArray* array)
 
 void ResizeArray(DynamicArray* array, int capacity)
 {
-	int* newArray = new int[capacity];
+	int* newDynamicArray = new int[capacity];
 	for (int i = 0; i < capacity; i++)
 	{
-		newArray[i] = array->Array[i];
+		newDynamicArray[i] = array->Array[i];
 	}
 
 	delete[] array->Array;
-	array->Array = newArray;
+	array->Array = newDynamicArray;
 }
 
 bool CheckRange(DynamicArray* array, int index)

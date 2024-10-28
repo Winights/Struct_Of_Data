@@ -8,16 +8,56 @@
 using namespace std;
 
 /// <summary>
+/// Проверяет является ли строка числом.
+/// </summary>
+/// <param name="prompt">Введенные значения.</param>
+/// <returns>Возвращает true, если является числом, иначе false.</returns>
+bool isNumber(const std::string& prompt)
+{
+    if (prompt.empty())
+    {
+        return false;
+    }
+
+    // Проверяем, есть ли знак числа
+    size_t start = 0;
+    if (prompt[0] == '-' || prompt[0] == '+')
+    {
+        start = 1;
+    }
+
+    for (size_t i = start; i < prompt.size(); ++i)
+    {
+        if (!isdigit(prompt[i]))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/// <summary>
 /// Получение значения от пользователя.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
 /// <returns>Возвращает число</returns>
 int GetInput(const string& prompt)
 {
-    int value;
+    string input;
     cout << prompt;
-    cin >> value;
-    return value;
+    cin >> input;
+
+    if (isNumber(input))
+    {
+        return std::stoi(input);
+    }
+    else
+    {
+        std::cout << "Unknown command. Try entering the command again." << std::endl;
+        return GetInput(prompt);
+    }
+
 }
 
 int main()

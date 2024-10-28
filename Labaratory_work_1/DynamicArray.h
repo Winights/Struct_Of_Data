@@ -22,8 +22,14 @@ struct DynamicArray
 
 };
 
+/// <summary>
+/// Начальная емкость.
+/// </summary>
 const  int originalCapacity = 4;
 
+/// <summary>
+/// Фактор роста массива.
+/// </summary>
 const  int growthFactor = 2;
 
 /// <summary>
