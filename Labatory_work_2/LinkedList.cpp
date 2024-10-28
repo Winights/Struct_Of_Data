@@ -1,4 +1,5 @@
 ﻿#include "LinkedList.h"
+#include "LinkedListItem.h"
 #include <string>
 #include <iostream>
 
@@ -6,9 +7,9 @@ using namespace std;
 
 LinkedList* CreateDynamicList()
 {
-	LinkedList* list = new LinkedList;
+	LinkedList* linkedList = new LinkedList;
 
-	return list;
+	return linkedList;
 }
 
 void InitializationLinkedList(LinkedList* list)
@@ -24,64 +25,59 @@ void InitializationLinkedList(LinkedList* list)
 
 void AddToBegin(LinkedList* list, int value)
 {
-    Node* node = new Node;
-    node->Data = value;
+    Node* NewNode = CreateLinkedListItem();
+    NewNode->Data = value;
 
-    node->Next = list->Head;
+    NewNode->Next = list->Head;
 
     if (list->Head != nullptr)
     {
-        list->Head->Prev = node;
+        list->Head->Prev = NewNode;
     }
 
     if (list->Tail == nullptr)
     {
-        list->Tail = node;
+        list->Tail = NewNode;
     }
 
-    list->Head = node;
+    list->Head = NewNode;
     
 }
 
 void AddToEnd(LinkedList* list, int value)
 {
-    Node* node = new Node;
-    node->Data = value;
+    Node* NewNode = CreateLinkedListItem();
+    NewNode->Data = value;
 
-    node->Prev = list->Tail;
+    NewNode->Prev = list->Tail;
 
     if (list->Tail != nullptr)
     {
-        list->Tail->Next = node;
+        list->Tail->Next = NewNode;
     } 
 
     if (list->Head == nullptr)
     {
-        list->Head = node;
+        list->Head = NewNode;
     }
 
-    list->Tail = node;
+    list->Tail = NewNode;
 
 }
 
 Node* GetElement(LinkedList* list, int index)
 {
-    Node* node = new Node;
-    node->Data = list->Head->Data;
-
-    int n = 0;
-
-    while (n != index) 
+    Node* currentNode = list->Head;
+    for (int i = 0; i < index; ++i)
     {
-        if (node == nullptr)
+        if (currentNode == nullptr)
         {
-            return node;
+            return currentNode;
         }
-        node = node->Next;
-        n++;
+        currentNode = currentNode->Next;
     }
 
-    return node;
+    return currentNode;
 }
 
 void RemoveToBegin(LinkedList* list)
@@ -126,27 +122,29 @@ void RemoveToEnd(LinkedList* list)
 
 }
 
-int InsertByIndex(LinkedList* list, int index, int value)
+void InsertByIndex(LinkedList* list, int index, int value)
 {
     Node* right = GetElement(list, index);
-    if (right == nullptr)
+    if (right->Next == nullptr)
     {
-        return 1;
+        AddToEnd(list, value);
+        return;
     }       
 
     Node* left = right->Prev;
     if (left == nullptr)
     {
-        return 2;
+        AddToBegin(list, value);
+        return;
     }
 
-    Node* node = new Node;
-    node->Data = value;
+    Node* newNode = CreateLinkedListItem();
+    newNode->Data = value;
 
-    node->Prev = left;
-    node->Next = right;
-    left->Next = node;
-    right->Prev = node;
+    newNode->Prev = left;
+    newNode->Next = right;
+    left->Next = newNode;
+    right->Prev = newNode;
 
 }
 
@@ -158,41 +156,33 @@ void RemoveByIndex(LinkedList* list, int index)
         return;
     }
 
-    Node* current = list->Head;
-    for (int i = 0; i < index; ++i) 
-    {
-        if (current == nullptr) 
-        {
-            std::cout << "Index out of bounds" << std::endl;
-            return;
-        }
-        current = current->Next;
-    }
+    Node* currentNode = GetElement(list, index);
 
     // Если нашли нужный узел
-    if (current) 
+    if (currentNode) 
     {
-        if (current->Prev) 
+        if (currentNode->Prev) 
         {
-            current->Prev->Next = current->Next;
+            currentNode->Prev->Next = currentNode->Next;
         }
         else 
         {
             // Обработка случая, если это голова
-            list->Head = current->Next;
+            list->Head = currentNode->Next;
         }
 
-        if (current->Next) 
+        if (currentNode->Next) 
         {
-            current->Next->Prev = current->Prev;
+            currentNode->Next->Prev = currentNode->Prev;
         }
         else 
         {
             // Обработка случая, если это хвост
-            list->Tail = current->Prev;
+            list->Tail = currentNode->Prev;
         }
 
-        delete current; // Освобождаем память
+        // Освобождаем память
+        delete currentNode; 
     }
     else 
     {
@@ -205,7 +195,8 @@ void RemoveByIndex(LinkedList* list, int index)
 /// </summary>
 /// <param name="left">Указатель на левую часть списка.</param>
 /// <param name="right">Указатель на правую часть списка.</param>
-/// <returns>Возвращает указатель на узел, который является головой объединенного отсортированного списка.</returns>
+/// <returns>Возвращает указатель на узел, который является 
+/// головой объединенного отсортированного списка.</returns>
 Node* Merge(Node* left, Node* right) 
 {
     if (!left)
@@ -238,7 +229,8 @@ Node* Merge(Node* left, Node* right)
 /// Делит список на две части.
 /// </summary>
 /// <param name="head">Указатель на узел, который является головой в списке.</param>
-/// <returns>Возвращает указатель на вторую половину списка, разделенного по середине.</returns>
+/// <returns>Возвращает указатель на вторую половину списка, 
+/// разделенного по середине.</returns>
 Node* Split(Node* head) 
 {
     Node* slow = head;
@@ -304,9 +296,9 @@ void LinerSearch(LinkedList* list, int value)
 
 void PrintList(LinkedList* list)
 {
-    for (Node* ptr = list->Head; ptr != nullptr; ptr = ptr->Next)
+    for (Node* node = list->Head; node != nullptr; node = node->Next)
     {
-        std::cout << ptr->Data << " ";
+        std::cout << node->Data << " ";
     }
     cout << endl;
 }

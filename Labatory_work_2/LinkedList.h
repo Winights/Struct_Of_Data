@@ -1,25 +1,5 @@
 ﻿#pragma once
-
-/// <summary>
-/// Структура узла.
-/// </summary>
-struct Node
-{
-	/// <summary>
-	/// Элемент.
-	/// </summary>
-	int Data;
-
-	/// <summary>
-	/// Ссылка на следующий элемент.
-	/// </summary>
-	Node* Next = nullptr;
-
-	/// <summary>
-	/// Ссылка на предыдущий элемент.
-	/// </summary>
-	Node* Prev = nullptr;
-};
+#include "LinkedListItem.h"
 
 /// <summary>
 /// Структура двухсвязанного списка.
@@ -88,7 +68,7 @@ void RemoveToEnd(LinkedList* list);
 /// <param name="list">Структура двухсвязного списка.</param>
 /// <param name="index">Индекс элемента.</param>
 /// <param name="value">Значение.</param>
-int InsertByIndex(LinkedList* list, int index, int value);
+void InsertByIndex(LinkedList* list, int index, int value);
 
 /// <summary>
 /// Сортировка списка.

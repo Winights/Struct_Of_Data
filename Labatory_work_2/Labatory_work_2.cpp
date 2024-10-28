@@ -5,8 +5,39 @@
 #include "LinkedList.h"
 #include <string>
 #include <chrono>
+#include <cctype>
 
 using namespace std;
+
+/// <summary>
+/// Проверяет является ли строка числом.
+/// </summary>
+/// <param name="prompt">Введенные значения.</param>
+/// <returns>Возвращает true, если является числом, иначе false.</returns>
+bool isNumber(const std::string& str) 
+{
+    if (str.empty())
+    {
+        return false;
+    }
+
+    // Проверяем, есть ли знак числа
+    size_t start = 0;
+    if (str[0] == '-' || str[0] == '+') 
+    {
+        start = 1;
+    }
+
+    for (size_t i = start; i < str.size(); ++i) 
+    {
+        if (!isdigit(str[i]))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 /// <summary>
 /// Получение значения от пользователя.
@@ -15,10 +46,20 @@ using namespace std;
 /// <returns>Возвращает число</returns>
 int GetInput(const string& prompt)
 {
-    int value;
+    string input;
     cout << prompt;
-    cin >> value;
-    return value;
+    cin >> input;
+
+    if (isNumber(input)) 
+    {
+        return std::stoi(input);
+    }
+    else 
+    {
+        std::cout << "Unknown command. Try entering the command again." << std::endl;
+        return GetInput(prompt);
+    }
+    
 }
 
 int main()
@@ -55,6 +96,8 @@ int main()
             std::chrono::duration<double, std::milli> elapsed = end - start;
 
             cout << "Elapsed time (ms): " << elapsed.count() << " ms" << endl;
+
+
             PrintList(linkedList);
             cout << endl;
             break;
@@ -73,7 +116,6 @@ int main()
             int value = GetInput("Enter the element to insert it at the end: ");
             cout << endl;
             AddToEnd(linkedList, value);
-            
             cout << endl;
             PrintList(linkedList);
             cout << endl;
@@ -85,15 +127,15 @@ int main()
             int value = GetInput("Enter the value you want to insert: ");
             cout << endl;
             auto start = std::chrono::high_resolution_clock::now();
-            int result = InsertByIndex(linkedList, index, value);
-            if (result == 1)
+            InsertByIndex(linkedList, index, value);
+            /*if (resultInsert == 1)
             {
                 AddToEnd(linkedList, value);                    
             }
-            if (result == 2)
+            if (resultInsert == 2)
             {
                 AddToBegin(linkedList, value);
-            }
+            }*/
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double, std::milli> elapsed = end - start;
 
@@ -126,7 +168,6 @@ int main()
         }
     }
     FreeList(linkedList);
-    
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
