@@ -9,14 +9,16 @@ LinkedList* CreateDynamicList()
 {
 	LinkedList* linkedList = new LinkedList;
 
+    linkedList->Size = 0;
+
 	return linkedList;
 }
 
-void InitializationLinkedList(LinkedList* list)
+void InitializationLinkedList(LinkedList* list, int size)
 {
     srand(time(0));
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < size; i++)
     {
         int value = rand() % 21;
         AddToEnd(list, value);
@@ -41,6 +43,7 @@ void AddToBegin(LinkedList* list, int value)
     }
 
     list->Head = NewNode;
+    list->Size++;
     
 }
 
@@ -62,6 +65,7 @@ void AddToEnd(LinkedList* list, int value)
     }
 
     list->Tail = NewNode;
+    list->Size++;
 
 }
 
@@ -96,6 +100,7 @@ void RemoveToBegin(LinkedList* list)
 
     delete list->Head;
     list->Head = node;
+    list->Size--;
 
 }
 
@@ -119,6 +124,7 @@ void RemoveToEnd(LinkedList* list)
 
     delete list->Tail;
     list->Tail = node;
+    list->Size--;
 
 }
 
@@ -145,6 +151,7 @@ void InsertByIndex(LinkedList* list, int index, int value)
     newNode->Next = right;
     left->Next = newNode;
     right->Prev = newNode;
+    list->Size++;
 
 }
 
@@ -181,8 +188,8 @@ void RemoveByIndex(LinkedList* list, int index)
             list->Tail = currentNode->Prev;
         }
 
-        // Освобождаем память
-        delete currentNode; 
+        delete currentNode;
+        list->Size--;
     }
     else 
     {
@@ -309,6 +316,7 @@ void FreeList(LinkedList* list)
     while (list->Head != nullptr)
     {
         RemoveToBegin(list);
+        list->Size--;
     }
     delete list;
 }

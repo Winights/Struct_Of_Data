@@ -6,6 +6,7 @@
 #include <string>
 #include <chrono>
 #include <cctype>
+#include <fstream>
 
 using namespace std;
 
@@ -64,10 +65,44 @@ int GetInput(const string& prompt)
 
 int main()
 {
+    /*int lists_count = 100;
+        int step = 10000;
+        int samples = 200;
+        std::ofstream outfile("C:\\Users\\fgfgf\\Desktop\\mean_delete_from_center.csv");
+        srand(time(0));
+        outfile << "linked_list_size;mean_delete_from_center_time" << std::endl;
+        for (int i = 0; i < lists_count; i++) {
+            for (size_t j = 0; j < step; j++)
+            {
+                AddToBegin(linkedList, rand() % 21);
+            }
+            int res = 0;
+            cout << i << endl;
+            for (size_t sampl = 0; sampl < samples; sampl++)
+            {
+                auto start = std::chrono::high_resolution_clock::now();
+                InsertByIndex(linkedList, int((i + 1) * step / 2), rand() % 21);
+                AddToEnd(linkedList, rand() % 21);
+                RemoveByIndex(linkedList, int((i + 1) * step / 2));
+                RemoveToBegin(linkedList);
+                RemoveToEnd(linkedList);
+                auto end = std::chrono::high_resolution_clock::now();
+                AddToBegin(linkedList, rand() % 21);
+                RemoveToBegin(linkedList);
+                auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+                res += duration.count();
+            }
+            res /= samples;
+            outfile << (i + 1) * step << ";" << res << std::endl;*/
+
+            //cout << "List of size:\t" << (i + 1) * step << ".\tTime to delete "
+            //    << int((i + 1) * step / 2) << "\titem:\t" << duration.count() << " microseconds" << endl;
+
+     /*   outfile.close();*/
     LinkedList* linkedList = CreateDynamicList();
 
     cout << "Current list \n";
-    InitializationLinkedList(linkedList);
+    InitializationLinkedList(linkedList, 5);
     cout << endl;
     PrintList(linkedList);
     cout << endl;
@@ -75,32 +110,20 @@ int main()
     while (true)
     {
         cout << "Select the action you want to do: \n";
-        cout << "1. Remove an element by index from an list \n";
-        cout << "2. Insert an element at the beginning \n";
-        cout << "3. Insert an element at the end \n";
-        cout << "4. Insert after a certain element \n";
-        cout << "5. Sort array \n";
-        cout << "6. Linear search for an element in an array \n";
+        cout << "1. Insert an element at the beginning \n";
+        cout << "2. Insert an element at the end \n";
+        cout << "3. Insert after a certain element \n";
+        cout << "4. Remove an element at the beginning \n";
+        cout << "5. Remove an element at the end \n";
+        cout << "6. Remove an element by index from an list \n";
+        cout << "7. Sort array \n";
+        cout << "8. Linear search for an element in an list \n";
 
         int choice = GetInput("Your input: ");
 
         switch (choice)
         {
         case 1:
-        {
-            int index = GetInput("Enter the index to delete: ");
-            cout << endl;
-            auto start = std::chrono::high_resolution_clock::now();
-            RemoveByIndex(linkedList, index);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double, std::milli> elapsed = end - start;
-            cout << "Elapsed time (ms): " << elapsed.count() << " ms" << endl;
-
-            PrintList(linkedList);
-            cout << endl;
-            break;
-        }
-        case 2:
         {
             int value = GetInput("Enter the element to insert it at the beginning: ");
             cout << endl;
@@ -109,7 +132,7 @@ int main()
             cout << endl;
             break;
         }
-        case 3:
+        case 2:
         {
             int value = GetInput("Enter the element to insert it at the end: ");
             cout << endl;
@@ -119,23 +142,45 @@ int main()
             cout << endl;
             break;
         }
-        case 4:
+        case 3:
         {
             int index = GetInput("Enter the index where you want to insert the value: ");
             int value = GetInput("Enter the value you want to insert: ");
             cout << endl;
-            auto start = std::chrono::high_resolution_clock::now();
             InsertByIndex(linkedList, index, value);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double, std::milli> elapsed = end - start;
-
-            cout << "Elapsed time (ms): " << elapsed.count() << " ms" << endl;
             PrintList(linkedList);
             std::cout << std::endl;
             cout << endl;
             break;
         }
+        case 4:
+        {
+            cout << endl;
+            RemoveToBegin(linkedList);
+            cout << "Element is deleted " << endl;
+            PrintList(linkedList);
+            cout << endl;
+            break;
+        }
         case 5:
+        {
+            cout << endl;
+            RemoveToEnd(linkedList);
+            cout << "Element is deleted " << endl;
+            PrintList(linkedList);
+            cout << endl;
+            break;
+        }
+        case 6:
+        {
+            int index = GetInput("Enter the index of element to delete: ");
+            cout << endl;
+            RemoveByIndex(linkedList, index);
+            PrintList(linkedList);
+            cout << endl;
+            break;
+        }
+        case 7:
         {
             SortList(linkedList);
             cout << "List is sorted " << endl;
@@ -144,7 +189,7 @@ int main()
             cout << endl;
             break;
         }
-        case 6:
+        case 8:
         {
             int value = GetInput("Enter the value you want to find in the array: ");
             cout << endl;
@@ -159,6 +204,8 @@ int main()
     }
     FreeList(linkedList);
 }
+
+
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"

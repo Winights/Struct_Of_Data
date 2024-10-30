@@ -15,6 +15,11 @@ struct LinkedList
 	/// Ссылка на последний элемент.
 	/// </summary>
 	Node* Tail = nullptr;
+
+	/// <summary>
+	/// Размер списка.
+	/// </summary>
+	int Size;
 };
 
 /// <summary>
@@ -27,7 +32,7 @@ LinkedList* CreateDynamicList();
 /// Инциализация списка случайными значениями.
 /// </summary>
 /// <param name="array">Структура двухсвязного списка.</param>
-void InitializationLinkedList(LinkedList* list);
+void InitializationLinkedList(LinkedList* list, int size);
 
 /// <summary>
 /// Добавление элемента в начало списка.
