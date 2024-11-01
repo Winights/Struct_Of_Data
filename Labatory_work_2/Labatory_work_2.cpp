@@ -99,7 +99,7 @@ int main()
             //    << int((i + 1) * step / 2) << "\titem:\t" << duration.count() << " microseconds" << endl;
 
      /*   outfile.close();*/
-    LinkedList* linkedList = CreateDynamicList();
+    LinkedList* linkedList = CreateLinkedList();
 
     cout << "Current list \n";
     InitializationLinkedList(linkedList, 5);

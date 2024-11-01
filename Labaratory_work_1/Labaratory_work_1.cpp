@@ -66,9 +66,10 @@ int main()
 
     cout << "Current array \n";
 
-    InitializationDynamicArray(dynamicArray);
-
+    InitializationDynamicArray(dynamicArray, 5);
+    cout << endl;
     PrintArray(dynamicArray);
+    cout << endl;
 
     while (true)
     {

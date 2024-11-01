@@ -5,7 +5,7 @@
 
 using namespace std;
 
-LinkedList* CreateDynamicList()
+LinkedList* CreateLinkedList()
 {
 	LinkedList* linkedList = new LinkedList;
 
@@ -86,7 +86,10 @@ Node* GetElement(LinkedList* list, int index)
 
 void RemoveToBegin(LinkedList* list)
 {
-    if (list->Head == nullptr) return;
+    if (list->Head == nullptr)
+    {
+        return;
+    }
 
     Node* node = list->Head->Next;
     if (node != nullptr)
@@ -206,6 +209,7 @@ void RemoveByIndex(LinkedList* list, int index)
 /// головой объединенного отсортированного списка.</returns>
 Node* Merge(Node* left, Node* right) 
 {
+    //Если один из списков пустой
     if (!left)
     {
         return right;
@@ -243,18 +247,21 @@ Node* Split(Node* head)
     Node* slow = head;
     Node* fast = head->Next;
 
+    //Находим середину спика
     while (fast && fast->Next)
     {
         slow = slow->Next;
         fast = fast->Next->Next;
     }
 
+    //Разделяем список на две половины
     Node* temp = slow->Next;
     slow->Next = nullptr;
     if (temp)
     {
         temp->Prev = nullptr;
     }
+
     return temp;
 }
 
@@ -270,10 +277,13 @@ Node* MergeSort(Node* head)
         return head;
     }
 
+    ///Делит список на две части.
     Node* secondHalf = Split(head);
+    //Отсоединяет ссылки у половины.
     head = MergeSort(head);
     secondHalf = MergeSort(secondHalf);
 
+    //Объединенные половины списка.
     return Merge(head, secondHalf);
 }
 
@@ -316,7 +326,6 @@ void FreeList(LinkedList* list)
     while (list->Head != nullptr)
     {
         RemoveToBegin(list);
-        list->Size--;
     }
     delete list;
 }

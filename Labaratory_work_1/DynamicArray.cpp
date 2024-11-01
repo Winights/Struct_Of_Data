@@ -15,11 +15,11 @@ DynamicArray* CreateDynamicArray()
 	return dynamicArray;
 }
 
-void InitializationDynamicArray(DynamicArray* array)
+void InitializationDynamicArray(DynamicArray* array, int size)
 {
 	srand(time(0));
 
-	array->Size = 3;
+	array->Size = size;
 
 	for (int i = 0; i < array->Size; i++)
 	{
@@ -99,7 +99,6 @@ void RemoveByValue(DynamicArray* array, int value)
 {
 	for (int i = 0; i < array->Size; ++i)
 	{
-		// Если найден элемент, который нужно удалить
 		if (array->Array[i] == value)
 		{
 			// Сдвигаем все элементы влево
@@ -107,7 +106,6 @@ void RemoveByValue(DynamicArray* array, int value)
 			{
 				array->Array[j] = array->Array[j + 1];
 			}
-			// Уменьшаем размер массива
 			array->Size--;
 			// Уменьшаем индекс, чтобы не пропустить следующий элемент
 			i--;
@@ -128,7 +126,7 @@ void SortArray(DynamicArray* array)
 	int temp = 0;
 	for (int i = 0; i < array->Size-1; i++)
 	{
-		for (int j = 0; j < array->Size-i-1; j++)
+		for (int j = i; j < array->Size-1; j++)
 		{
 			if (array->Array[j] > array->Array[j+1])
 			{

@@ -26,7 +26,7 @@ struct LinkedList
 /// Создание двухсвязного списка.
 /// </summary>
 /// <returns>Возвращает созданный двухсвязный спискок</returns>
-LinkedList* CreateDynamicList();
+LinkedList* CreateLinkedList();
 
 /// <summary>
 /// Инциализация списка случайными значениями.
