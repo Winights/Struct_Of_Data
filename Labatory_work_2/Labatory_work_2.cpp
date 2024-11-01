@@ -98,6 +98,7 @@ int main()
             //cout << "List of size:\t" << (i + 1) * step << ".\tTime to delete "
             //    << int((i + 1) * step / 2) << "\titem:\t" << duration.count() << " microseconds" << endl;
 
+    //Фигурная скобка
      /*   outfile.close();*/
     LinkedList* linkedList = CreateLinkedList();
 
@@ -113,11 +114,14 @@ int main()
         cout << "1. Insert an element at the beginning \n";
         cout << "2. Insert an element at the end \n";
         cout << "3. Insert after a certain element \n";
-        cout << "4. Remove an element at the beginning \n";
-        cout << "5. Remove an element at the end \n";
-        cout << "6. Remove an element by index from an list \n";
-        cout << "7. Sort array \n";
-        cout << "8. Linear search for an element in an list \n";
+        cout << "4. Insert element after a certain element \n";
+        cout << "5. Insert element before a certain element \n";
+        cout << "6. Remove an element at the beginning \n";
+        cout << "7. Remove an element at the end \n";
+        cout << "8. Remove an element by index from an list \n";
+        cout << "9. Remove an element by value from an list \n";
+        cout << "10. Sort array \n";
+        cout << "11. Linear search for an element in an list \n";
 
         int choice = GetInput("Your input: ");
 
@@ -155,6 +159,28 @@ int main()
         }
         case 4:
         {
+            int target = GetInput("Enter the value which after you want to insert the value: ");
+            int value = GetInput("Enter the value you want to insert: ");
+            cout << endl;
+            InsertByValueAfter(linkedList, value, target);
+            PrintList(linkedList);
+            std::cout << std::endl;
+            cout << endl;
+            break;
+        }
+        case 5:
+        {
+            int target = GetInput("Enter the value which before you want to insert the value: ");
+            int value = GetInput("Enter the value you want to insert: ");
+            cout << endl;
+            InsertByValueBefore(linkedList, value, target);
+            PrintList(linkedList);
+            std::cout << std::endl;
+            cout << endl;
+            break;
+        }
+        case 6:
+        {
             cout << endl;
             RemoveToBegin(linkedList);
             cout << "Element is deleted " << endl;
@@ -162,7 +188,7 @@ int main()
             cout << endl;
             break;
         }
-        case 5:
+        case 7:
         {
             cout << endl;
             RemoveToEnd(linkedList);
@@ -171,7 +197,7 @@ int main()
             cout << endl;
             break;
         }
-        case 6:
+        case 8:
         {
             int index = GetInput("Enter the index of element to delete: ");
             cout << endl;
@@ -180,7 +206,16 @@ int main()
             cout << endl;
             break;
         }
-        case 7:
+        case 9:
+        {
+            int value = GetInput("Enter the index of element to delete: ");
+            cout << endl;
+            RemoveByValue(linkedList, value);
+            PrintList(linkedList);
+            cout << endl;
+            break;
+        }
+        case 10:
         {
             SortList(linkedList);
             cout << "List is sorted " << endl;
@@ -189,7 +224,7 @@ int main()
             cout << endl;
             break;
         }
-        case 8:
+        case 11:
         {
             int value = GetInput("Enter the value you want to find in the array: ");
             cout << endl;

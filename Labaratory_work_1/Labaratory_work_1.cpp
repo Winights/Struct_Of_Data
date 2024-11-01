@@ -57,7 +57,6 @@ int GetInput(const string& prompt)
         std::cout << "Unknown command. Try entering the command again." << std::endl;
         return GetInput(prompt);
     }
-
 }
 
 int main()
@@ -66,7 +65,7 @@ int main()
 
     cout << "Current array \n";
 
-    InitializationDynamicArray(dynamicArray, 5);
+    InitializationDynamicArray(dynamicArray);
     cout << endl;
     PrintArray(dynamicArray);
     cout << endl;
@@ -117,7 +116,7 @@ int main()
         case 4:
         {
             int value = GetInput("Enter the element to inset it at the end: ");
-            cout << endl;
+            cout << endl;;
             AddElement(dynamicArray, dynamicArray->Size, value);
             PrintArray(dynamicArray);
             cout << endl;
@@ -137,6 +136,7 @@ int main()
         {
             SortArray(dynamicArray);
             cout << "Array is sorted " << endl;
+            cout << endl;
             PrintArray(dynamicArray);
             cout << endl;
             break;

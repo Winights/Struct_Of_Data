@@ -76,6 +76,22 @@ void RemoveToEnd(LinkedList* list);
 void InsertByIndex(LinkedList* list, int index, int value);
 
 /// <summary>
+/// Вставить элемент в список после определенного элемента.
+/// </summary>
+/// <param name="list">Структура двухсвязного списка.</param>
+/// <param name="target">Элемент, после которого вставят значение.</param>
+/// <param name="value">Значение.</param>
+void InsertByValueAfter(LinkedList* list, int value, int target);
+
+/// <summary>
+/// Вставить элемент в список перед определенным элементом.
+/// </summary>
+/// <param name="list">Структура двухсвязного списка.</param>
+/// <param name="target">Элемент, перед которым вставят значение.</param>
+/// <param name="value">Значение.</param>
+void InsertByValueBefore(LinkedList* list, int value, int target);
+
+/// <summary>
 /// Сортировка списка.
 /// </summary>
 /// <param name="list">Структура двухсвязного списка.</param>
@@ -87,6 +103,13 @@ void SortList(LinkedList* list);
 /// <param name="list">Структура двухсвязного списка.</param>
 /// <param name="index">Индекс элемента.</param>
 void RemoveByIndex(LinkedList* list, int index);
+
+/// <summary>
+/// Удалить элемент из списка по значению.
+/// </summary>
+/// <param name="list">Структура двухсвязного списка.</param>
+/// <param name="index">Значение элемента.</param>
+void RemoveByValue(LinkedList* list, int value);
 
 /// <summary>
 /// Линейный поиск.

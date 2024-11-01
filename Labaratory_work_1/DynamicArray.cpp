@@ -1,4 +1,4 @@
-#include "DynamicArray.h"
+п»ї#include "DynamicArray.h"
 #include <string>
 #include <iostream>
 
@@ -15,11 +15,11 @@ DynamicArray* CreateDynamicArray()
 	return dynamicArray;
 }
 
-void InitializationDynamicArray(DynamicArray* array, int size)
+void InitializationDynamicArray(DynamicArray* array)
 {
 	srand(time(0));
 
-	array->Size = size;
+	array->Size = 3;
 
 	for (int i = 0; i < array->Size; i++)
 	{
@@ -41,57 +41,56 @@ void ResizeArray(DynamicArray* array, int capacity)
 
 bool CheckRange(DynamicArray* array, int index)
 {
-	if (index < 0 && index > array->Size)
+	if (index < -1 || index > array->Size)
 	{
 		cout << "Index out of range.\n";
+		cout << endl;
 		return false;
 	}
-	return true;
 }
 
 void AddElement(DynamicArray* array, int index, int value)
 {
-	bool flagCheckRange = CheckRange(array, index);
-
-	if (flagCheckRange == false)
+	if (!CheckRange(array, index))
 	{
-		cout << "Index out of range. Reenter index.\n";
 		return;
 	}
-
-	if (array->Size >= array->Capacity)
+	else
 	{
-		ResizeArray(array, array->Capacity * growthFactor);
-	}
+		if (array->Size >= array->Capacity)
+		{
+			ResizeArray(array, array->Capacity * growthFactor);
+		}
 
-	for (int i = array->Size; i > index; i--)
-	{
-		array->Array[i] = array->Array[i - 1];
-	}
+		for (int i = array->Size; i > index; i--)
+		{
+			array->Array[i] = array->Array[i - 1];
+		}
 
-	array->Array[index] = value;
-	array->Size++;
+		array->Array[index] = value;
+		array->Size++;
+	}
 }
 
 void RemoveByIndex(DynamicArray* array, int index)
 {
-	bool flagCheckRange = CheckRange(array, index);
-	if (flagCheckRange == false)
+	if (!CheckRange(array, index))
 	{
-		cout << "Index out of range. Reenter index.\n";
 		return;
 	}
-
-	for (int i = index; i < array->Size - 1; i++)
+	else
 	{
-		array->Array[i] = array->Array[i + 1];
-	}
+		for (int i = index; i < array->Size - 1; i++)
+		{
+			array->Array[i] = array->Array[i + 1];
+		}
 
-	array->Size--;
+		array->Size--;
 
-	if (array->Size < array->Capacity / growthFactor)
-	{
-		ResizeArray(array, array->Capacity / growthFactor);
+		if (array->Size < array->Capacity / growthFactor)
+		{
+			ResizeArray(array, array->Capacity / growthFactor);
+		}
 	}
 }
 
@@ -101,13 +100,13 @@ void RemoveByValue(DynamicArray* array, int value)
 	{
 		if (array->Array[i] == value)
 		{
-			// Сдвигаем все элементы влево
+			// РЎРґРІРёРіР°РµРј РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РІР»РµРІРѕ
 			for (int j = i; j < array->Size - 1; ++j)
 			{
 				array->Array[j] = array->Array[j + 1];
 			}
 			array->Size--;
-			// Уменьшаем индекс, чтобы не пропустить следующий элемент
+			// РЈРјРµРЅСЊС€Р°РµРј РёРЅРґРµРєСЃ, С‡С‚РѕР±С‹ РЅРµ РїСЂРѕРїСѓСЃС‚РёС‚СЊ СЃР»РµРґСѓСЋС‰РёР№ СЌР»РµРјРµРЅС‚
 			i--;
 		}
 	}
@@ -126,7 +125,7 @@ void SortArray(DynamicArray* array)
 	int temp = 0;
 	for (int i = 0; i < array->Size-1; i++)
 	{
-		for (int j = i; j < array->Size-1; j++)
+		for (int j = 0; j < array->Size-i-1; j++)
 		{
 			if (array->Array[j] > array->Array[j+1])
 			{
@@ -147,6 +146,7 @@ void LinerSearch(DynamicArray* array, int value)
 		{
 			flag = true;
 			cout << "Needed element is at the index : " << i << "\n" << endl;
+			cout << "Needed element is at the position : " << i + 1 << "\n" << endl;
 		}
 	}
 	if (flag == false)
@@ -169,6 +169,7 @@ void BinarySearch(DynamicArray* array, int value)
 		if (array->Array[middle] == value)
 		{
 			cout << "Needed element is at the index: " << middle << "\n" << endl;
+			cout << "Needed element is at the position : " << middle + 1 << "\n" << endl;
 			flag = true;
 			break;
 		}
@@ -195,7 +196,6 @@ void PrintArray(DynamicArray* array)
 	}
 	cout << endl;
 }
-
 
 void FreeArray(DynamicArray* array)
 {

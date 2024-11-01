@@ -131,6 +131,82 @@ void RemoveToEnd(LinkedList* list)
 
 }
 
+void RemoveByIndex(LinkedList* list, int index)
+{
+    if (list->Head == nullptr || index < 0)
+    {
+        cout << "Invalid index" << endl;
+        return;
+    }
+
+    Node* currentNode = GetElement(list, index);
+
+    // Если нашли нужный узел
+    if (currentNode)
+    {
+        if (currentNode->Prev)
+        {
+            currentNode->Prev->Next = currentNode->Next;
+        }
+        else
+        {
+            // Обработка случая, если это голова
+            list->Head = currentNode->Next;
+        }
+
+        if (currentNode->Next)
+        {
+            currentNode->Next->Prev = currentNode->Prev;
+        }
+        else
+        {
+            // Обработка случая, если это хвост
+            list->Tail = currentNode->Prev;
+        }
+
+        delete currentNode;
+        list->Size--;
+    }
+    else
+    {
+        cout << "Index out of bounds" << endl;
+    }
+}
+
+void RemoveByValue(LinkedList* list, int value)
+{
+    Node* currentNode = list->Head;
+
+    while (currentNode != nullptr)
+    {
+        if (currentNode->Data == value)
+        {
+            if (currentNode->Prev)
+            {
+                currentNode->Prev->Next = currentNode->Next;
+            }
+            else
+            {
+                // Обработка случая, если это голова
+                list->Head = currentNode->Next;
+            }
+
+            if (currentNode->Next)
+            {
+                currentNode->Next->Prev = currentNode->Prev;
+            }
+            else
+            {
+                // Обработка случая, если это хвост
+                list->Tail = currentNode->Prev;
+            }
+            list->Size--;
+        }
+        currentNode = currentNode->Next;
+    }
+    delete currentNode;
+}
+
 void InsertByIndex(LinkedList* list, int index, int value)
 {
     Node* right = GetElement(list, index);
@@ -158,45 +234,60 @@ void InsertByIndex(LinkedList* list, int index, int value)
 
 }
 
-void RemoveByIndex(LinkedList* list, int index)
+void InsertByValueAfter(LinkedList* list, int value, int target)
 {
-    if (list->Head == nullptr || index < 0) 
+    Node* current = list->Head;
+
+    while (current != nullptr)
     {
-        std::cout << "Invalid index" << std::endl;
-        return;
+        if (current->Data == target)
+        {
+            Node* newNode = CreateLinkedListItem();
+            newNode->Data = value;
+            newNode->Next = current->Next;
+            newNode->Prev = current;
+
+            if (current->Next != nullptr)
+            {
+                current->Next->Prev = newNode;
+            }
+            current->Next = newNode;
+
+            if (current == nullptr)
+            { 
+                list->Head = newNode;
+            }
+            list->Size++;
+        }
+        current = current->Next;
     }
+}
 
-    Node* currentNode = GetElement(list, index);
+void InsertByValueBefore(LinkedList* list, int value, int target)
+{
+    Node* current = list->Head;
 
-    // Если нашли нужный узел
-    if (currentNode) 
+    while (current != nullptr) 
     {
-        if (currentNode->Prev) 
+        if (current->Data == target) 
         {
-            currentNode->Prev->Next = currentNode->Next;
-        }
-        else 
-        {
-            // Обработка случая, если это голова
-            list->Head = currentNode->Next;
-        }
+            Node* newNode = CreateLinkedListItem();
+            newNode->Data = value;
+            newNode->Prev = current->Prev;
+            newNode->Next = current;
 
-        if (currentNode->Next) 
-        {
-            currentNode->Next->Prev = currentNode->Prev;
+            if (current->Prev != nullptr) 
+            {
+                current->Prev->Next = newNode;
+            }
+            else 
+            {
+                list->Head = newNode;
+            }
+            current->Prev = newNode;
+            list->Size++;
         }
-        else 
-        {
-            // Обработка случая, если это хвост
-            list->Tail = currentNode->Prev;
-        }
-
-        delete currentNode;
-        list->Size--;
-    }
-    else 
-    {
-        std::cout << "Index out of bounds" << std::endl;
+        current = current->Next;
     }
 }
 
@@ -315,7 +406,7 @@ void PrintList(LinkedList* list)
 {
     for (Node* node = list->Head; node != nullptr; node = node->Next)
     {
-        std::cout << node->Data << " ";
+        cout << node->Data << " ";
     }
     cout << endl;
 }

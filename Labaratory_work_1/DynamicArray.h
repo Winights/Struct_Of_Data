@@ -42,7 +42,7 @@ DynamicArray* CreateDynamicArray();
 /// »нциализаци€ массива случайными значени€ми.
 /// </summary>
 /// <param name="array">—труктура динамического массива.</param>
-void InitializationDynamicArray(DynamicArray* array, int size);
+void InitializationDynamicArray(DynamicArray* array);
 
 /// <summary>
 /// ”величение размера динамического массива.
