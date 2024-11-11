@@ -1,4 +1,4 @@
-#include "Stack.h""
+п»ї#include "Stack.h""
 #include <iostream>
 #include <stdexcept>
 
@@ -37,7 +37,7 @@ void Push(Stack* stack, int data)
 {
     if (stack->Top >= stack->BufferSize)
     {
-        throw std::overflow_error("Стек переполнен");
+        throw std::overflow_error("РЎС‚РµРє РїРµСЂРµРїРѕР»РЅРµРЅ");
     }
     stack->Buffer[++stack->Top] = data;
 }
@@ -47,7 +47,7 @@ void Pop(Stack* stack)
 {
     if (IsEmpty(stack))
     {
-        throw std::underflow_error("Стек пуст"); 
+        throw std::underflow_error("РЎС‚РµРє РїСѓСЃС‚"); 
     }
     stack->Buffer[stack->Top--] = 0; 
 }

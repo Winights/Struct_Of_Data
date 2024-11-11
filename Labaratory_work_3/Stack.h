@@ -1,64 +1,64 @@
-#pragma once
+п»ї#pragma once
 
 /// <summary>
-/// Структура стека.
+/// РЎС‚СЂСѓРєС‚СѓСЂР° СЃС‚РµРєР°.
 /// </summary>
 struct Stack
 {
 	/// <summary>
-	/// Буфер стека в виде масиива.
+	/// Р‘СѓС„РµСЂ СЃС‚РµРєР° РІ РІРёРґРµ РјР°СЃРёРёРІР°.
 	/// </summary>
 	int* Buffer;
 
 	/// <summary>
-	/// Размер буфера.
+	/// Р Р°Р·РјРµСЂ Р±СѓС„РµСЂР°.
 	/// </summary>
 	int BufferSize;
 
 	/// <summary>
-	/// Индекс верхнего элемента.
+	/// РРЅРґРµРєСЃ РІРµСЂС…РЅРµРіРѕ СЌР»РµРјРµРЅС‚Р°.
 	/// </summary>
 	int Top;
 };
 
 /// <summary>
-/// Создание стека.
+/// РЎРѕР·РґР°РЅРёРµ СЃС‚РµРєР°.
 /// </summary>
-/// <returns>Созданный стек</returns>
+/// <returns>РЎРѕР·РґР°РЅРЅС‹Р№ СЃС‚РµРє</returns>
 Stack* CreateStack(int size);
 
 /// <summary>
-/// Инциализация стека.
+/// РРЅС†РёР°Р»РёР·Р°С†РёСЏ СЃС‚РµРєР°.
 /// </summary>
 void InitializationStack(Stack* stack);
 
 /// <summary>
-/// Изменение размерности стека.
+/// РР·РјРµРЅРµРЅРёРµ СЂР°Р·РјРµСЂРЅРѕСЃС‚Рё СЃС‚РµРєР°.
 /// </summary>
 void ResizeStack(Stack* stack, int newSize);
 
 /// <summary>
-/// Добавление в стек.
+/// Р”РѕР±Р°РІР»РµРЅРёРµ РІ СЃС‚РµРє.
 /// </summary>
 void Push(Stack* stack, int value);
 
 /// <summary>
-/// Удаление из стека.
+/// РЈРґР°Р»РµРЅРёРµ РёР· СЃС‚РµРєР°.
 /// </summary>
 void Pop(Stack* stack);
 
 /// <summary>
-/// Проверка пустой ли стек.
+/// РџСЂРѕРІРµСЂРєР° РїСѓСЃС‚РѕР№ Р»Рё СЃС‚РµРє.
 /// </summary>
-/// <returns>true, если пустой, иначе false.</returns>
+/// <returns>true, РµСЃР»Рё РїСѓСЃС‚РѕР№, РёРЅР°С‡Рµ false.</returns>
 bool IsEmpty(Stack* stack);
 
 /// <summary>
-/// Удаление стек.
+/// РЈРґР°Р»РµРЅРёРµ СЃС‚РµРє.
 /// </summary>
 void Delete(Stack* stack);
 
 /// <summary>
-/// Вывод стека.
+/// Р’С‹РІРѕРґ СЃС‚РµРєР°.
 /// </summary>
 void PrintStack(Stack* stack);

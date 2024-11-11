@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include <string>
-#include "Stack.h""
+#include "Stack.h"
+#include "CircularBuffer.h"
 
 using namespace std;
 
@@ -61,61 +62,100 @@ int GetInput(const string& prompt)
 
 int main()
 {
-    int size = GetInput("Enter size of stack: ");
+    int sizeOfStack = GetInput("Enter size of stack: ");
     cout << endl;
-    Stack* stack = CreateStack(size);
-    InitializationStack(stack);
-    PrintStack(stack);
+    Stack* stack = CreateStack(sizeOfStack);
+    int sizeOfCircular = GetInput("Enter size of circular buffer: ");
+    CircularBuffer* circularBuffer = CreateCircularBuffer(sizeOfCircular);
 
+    cout << endl;
 
     while (true)
     {
         cout << "Select the action you want to do: \n";
-        cout << "1. Push the value to stack \n";
-        cout << "2. Pop the value from stack \n";
-        cout << "3. Resize stack \n";
+        cout << "1. Print stack \n";
+        cout << "2. Push the value to stack \n";
+        cout << "3. Pop the value from stack \n";
+        cout << "4. Resize stack \n";
+        cout << "5. Print circular buffer \n";
+        cout << "6. Add element to circular buffer \n";
+        cout << "7. Get element from circular buffer \n";
 
         int choice = GetInput("Your input: ");
 
         switch (choice)
         {
-            case 1:
+        case 1:
+        {
+            cout << endl;
+            InitializationStack(stack);
+            PrintStack(stack);
+            cout << endl;
+            break;
+        }
+        case 2:
+        {
+            int value = GetInput("Enter the value to push: ");
+            cout << endl;
+            Push(stack, value);
+            PrintStack(stack);
+            cout << endl;
+            break;
+        }
+        case 3:
+        {
+            Pop(stack);
+            PrintStack(stack);
+            cout << endl;
+            break;
+        }
+        case 4:
+        {
+            int size = GetInput("Enter new size of stack:: ");
+            if (size < 0)
             {
-                int value = GetInput("Enter the value to push: ");
+                cout << "Size must be positive number or not be zero" << endl;
+                break;
+            }
+            else
+            {
+                ResizeStack(stack, size);
+                cout << "Resize was complete" << endl;
                 cout << endl;
-                Push(stack, value);
                 PrintStack(stack);
                 cout << endl;
                 break;
             }
-            case 2:
-            {
-                Pop(stack);
-                PrintStack(stack);
-                cout << endl;
-                break;
-            }
-            case 3:
-            {
-                int size = GetInput("Enter new size of stack:: ");
-                if (size < 0)
-                {
-                    cout << "Size must be positive number or not be zero" << endl;
-                    break;
-                }
-                else
-                {
-                    ResizeStack(stack, size);
-                    cout << "Resize was complete" << endl;
-                    cout << endl;
-                    PrintStack(stack);
-                    cout << endl;
-                    break;
-                }         
-            }
-            default:
-                cout << "Unknown command. Try entering the command again";
-            }
+        }
+        case 5:
+        {
+            cout << endl;
+            PrintCircularBuffer(circularBuffer);
+            cout << endl;
+            break;
+        }
+        case 6:
+        {
+            int value = GetInput("Enter the value to add: ");
+            cout << endl;
+            AddElement(circularBuffer, value);
+            PrintCircularBuffer(circularBuffer);
+            cout << endl;
+            break;
+        }
+        case 7:
+        {
+            int value = GetElement(circularBuffer);
+            cout << endl;
+            cout << "Element received " << value << endl;
+            cout << endl;
+            PrintCircularBuffer(circularBuffer);
+            cout << endl;
+        }
+        default:
+            cout << "Unknown command. Try entering the command again";
+        }
+            
     }
     Delete(stack);
 }
