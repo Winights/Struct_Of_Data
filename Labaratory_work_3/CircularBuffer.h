@@ -38,16 +38,26 @@ struct CircularBuffer
 CircularBuffer* CreateCircularBuffer(int capacity);
 
 /// <summary>
-/// Проверка на пустой буфер.
+/// Инциализация кольцевого буфера.
 /// </summary>
-/// <returns>На сколько пустой буфер</returns>
-int GetFreeSpace(CircularBuffer* circularBuffer);
+void InitializationBuffer(CircularBuffer* circularBuffer, int size);
 
 /// <summary>
-/// Проверка на полный буфер.
+/// Изменение размерности буфера.
 /// </summary>
-/// <returns>На сколько занят</returns>
-int GetOccupiedSpace(CircularBuffer* circularBuffer);
+void ResizeBuffer(CircularBuffer* circularBuffer, int newCapacity);
+
+///// <summary>
+///// Проверка на пустой буфер.
+///// </summary>
+///// <returns>На сколько пустой буфер</returns>
+//int GetFreeSpace(CircularBuffer* circularBuffer);
+//
+///// <summary>
+///// Проверка на полный буфер.
+///// </summary>
+///// <returns>На сколько занят</returns>
+//int GetOccupiedSpace(CircularBuffer* circularBuffer);
 
 /// <summary>
 /// Добавление элемента в кольцевого буфера.
@@ -61,12 +71,12 @@ void AddElement(CircularBuffer* circularBuffer, int value);
 int GetElement(CircularBuffer* circularBuffer);
 
 /// <summary>
-/// Удаление кольцевого буфера.
-/// </summary>
-void DeleteBuffer(CircularBuffer* circularBuffer);
-
-/// <summary>
 /// Вывод кольцевого буфера.
 /// </summary>
 void PrintCircularBuffer(CircularBuffer* circularBuffer);
+
+/// <summary>
+/// Удаление кольцевого буфера.
+/// </summary>
+void DeleteBuffer(CircularBuffer* circularBuffer);
 

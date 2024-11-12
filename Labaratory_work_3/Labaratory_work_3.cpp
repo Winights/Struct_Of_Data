@@ -5,6 +5,7 @@
 #include <string>
 #include "Stack.h"
 #include "CircularBuffer.h"
+#include "QueueCircularBuffer.h"
 
 using namespace std;
 
@@ -66,7 +67,11 @@ int main()
     cout << endl;
     Stack* stack = CreateStack(sizeOfStack);
     int sizeOfCircular = GetInput("Enter size of circular buffer: ");
+    cout << endl;
     CircularBuffer* circularBuffer = CreateCircularBuffer(sizeOfCircular);
+    int sizeOfQueueCircularBuffer = GetInput("Enter size of circular buffer: ");
+    cout << endl;
+    QueueCircularBuffer* queueCircularBuffer = CreateQueueCircularBuffer(sizeOfQueueCircularBuffer);
 
     cout << endl;
 
@@ -80,6 +85,11 @@ int main()
         cout << "5. Print circular buffer \n";
         cout << "6. Add element to circular buffer \n";
         cout << "7. Get element from circular buffer \n";
+        cout << "8. Resize circular buffer \n";
+        cout << "9. Print queue based on circular buffer \n";
+        cout << "10. Add element to queue based on circular buffer \n";
+        cout << "11. Get element from queue based on circular buffer \n";
+        cout << "12. Resize queue based on circular buffer \n";
 
         int choice = GetInput("Your input: ");
 
@@ -88,7 +98,6 @@ int main()
         case 1:
         {
             cout << endl;
-            InitializationStack(stack);
             PrintStack(stack);
             cout << endl;
             break;
@@ -105,13 +114,14 @@ int main()
         case 3:
         {
             Pop(stack);
+            cout << endl;
             PrintStack(stack);
             cout << endl;
             break;
         }
         case 4:
         {
-            int size = GetInput("Enter new size of stack:: ");
+            int size = GetInput("Enter new size of stack: ");
             if (size < 0)
             {
                 cout << "Size must be positive number or not be zero" << endl;
@@ -151,6 +161,70 @@ int main()
             cout << endl;
             PrintCircularBuffer(circularBuffer);
             cout << endl;
+            break;
+        }
+        case 8:
+        {
+            int size = GetInput("Enter new size of circular buffer: ");
+            if (size < 0)
+            {
+                cout << "Size must be positive number or not be zero" << endl;
+                break;
+            }
+            else
+            {
+                ResizeBuffer(circularBuffer, size);
+                cout << "Resize was complete" << endl;
+                cout << endl;
+                PrintCircularBuffer(circularBuffer);
+                cout << endl;
+                break;
+            }
+        }
+        case 9:
+        {
+            cout << endl;
+            PrintQueue(queueCircularBuffer);
+            cout << endl;
+            break;
+        }
+        case 10:
+        {
+            int value = GetInput("Enter the value to add: ");
+            cout << endl;
+            Enqueue(queueCircularBuffer, value);
+            PrintQueue(queueCircularBuffer);
+            cout << endl;
+            break;
+        }
+        case 11:
+        {
+            int value = Dequeue(queueCircularBuffer);
+            cout << endl;
+            cout << "Element received " << value << endl;
+            cout << endl;
+            PrintQueue(queueCircularBuffer);
+            cout << endl;
+            break;
+        }
+        case 12:
+        {
+            int size = GetInput("Enter new size of circular buffer: ");
+            if (size < 0)
+            {
+                cout << "Size must be positive number or not be zero" << endl;
+                break;
+            }
+            else
+            {
+                ResizeQueueCircularBuffer(queueCircularBuffer, size);
+                cout << endl;
+                cout << "Resize was complete" << endl;
+                cout << endl;
+                PrintQueue(queueCircularBuffer);
+                cout << endl;
+                break;
+            }
         }
         default:
             cout << "Unknown command. Try entering the command again";
@@ -158,6 +232,7 @@ int main()
             
     }
     Delete(stack);
+    DeleteBuffer(circularBuffer);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

@@ -4,20 +4,22 @@
 
 Stack* CreateStack(int size) 
 {
-    Stack* stack = new Stack;       
-    stack->Buffer = new int[size];  
-    stack->BufferSize = size;       
+    Stack* stack = new Stack;  
+    stack->BufferSize = size;
+    stack->Buffer = new int[stack->BufferSize];
+    stack->Count = 0;
     stack->Top = -1;                
     return stack;
 }
 
-void InitializationStack(Stack* stack)
-{
-    for (int i = stack->BufferSize - 1; i > -1; i--)
-    {
-        stack->Buffer[i] = 0;
-    }
-}
+//void InitializationStack(Stack* stack, int size)
+//{
+//    stack->BufferSize = size;
+//    for (int i = stack->BufferSize; i > -1; i--)
+//    {
+//        stack->Buffer[i] = 0;
+//    }
+//}
 
 void ResizeStack(Stack* stack, int newSize)
 {
@@ -40,6 +42,7 @@ void Push(Stack* stack, int data)
         throw std::overflow_error("Стек переполнен");
     }
     stack->Buffer[++stack->Top] = data;
+    ++stack->Count;
 }
 
 
@@ -50,6 +53,7 @@ void Pop(Stack* stack)
         throw std::underflow_error("Стек пуст"); 
     }
     stack->Buffer[stack->Top--] = 0; 
+    --stack->Count;
 }
 
 
@@ -67,7 +71,7 @@ void Delete(Stack* stack)
 
 void PrintStack(Stack* stack)
 {
-	for (int i = stack->Top; i > -1 ; i--)
+	for (int i = stack->Count-1; i > -1 ; i--)
 	{
 		std::cout << stack->Buffer[i] << "\n" << std::endl;
 	}

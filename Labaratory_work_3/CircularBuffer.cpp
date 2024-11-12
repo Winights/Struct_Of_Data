@@ -13,6 +13,29 @@ CircularBuffer* CreateCircularBuffer(int capacity)
     return circularBuffer;
 }
 
+void InitializationBuffer(CircularBuffer* circularBuffer, int size)
+{
+    circularBuffer->Size = size;
+    for (int i = 0; i < circularBuffer->Size; i++)
+    {
+        circularBuffer->Buffer[i] = 0;
+    }
+}
+
+void ResizeBuffer(CircularBuffer* circularBuffer, int newCapacity)
+{
+    circularBuffer->Capacity = newCapacity;
+    int* newBuffer = new int[newCapacity];
+
+    for (int i = 0; i < circularBuffer->Size; i++)
+    {
+        newBuffer[i] = circularBuffer->Buffer[i];
+    }
+
+    delete[] circularBuffer->Buffer;
+    circularBuffer->Buffer = newBuffer;
+}
+
 int GetFreeSpace(CircularBuffer* circularBuffer)
 {
     return circularBuffer->Capacity - circularBuffer->Size;
@@ -27,8 +50,7 @@ void AddElement(CircularBuffer* circularBuffer, int value)
 {
     if (GetFreeSpace(circularBuffer) == 0)
     {
-        circularBuffer->Write = 0;
-        circularBuffer->Size = 0;
+        throw std::overflow_error("Кольцевой буфер заполнен");
     }
 
     if (circularBuffer->Write >= circularBuffer->Capacity)
@@ -53,7 +75,7 @@ int GetElement(CircularBuffer* circularBuffer)
     }
 
     int value = circularBuffer->Buffer[circularBuffer->Read++];
-
+    --circularBuffer->Size;
     return value;
 }
 
@@ -65,9 +87,12 @@ void DeleteBuffer(CircularBuffer* circularBuffer)
 
 void PrintCircularBuffer(CircularBuffer* circularBuffer)
 {
+    int index = circularBuffer->Read;
+
     for (int i = 0; i < circularBuffer->Size; i++)
     {
-        std::cout << circularBuffer->Buffer[i] << " ";
+        std::cout << circularBuffer->Buffer[index] << " ";
+        index = (index + 1) % circularBuffer->Capacity;
     }
     std::cout << std::endl;
 }

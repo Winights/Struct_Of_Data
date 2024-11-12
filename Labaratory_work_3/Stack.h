@@ -19,6 +19,11 @@ struct Stack
 	/// Индекс верхнего элемента.
 	/// </summary>
 	int Top;
+
+	/// <summary>
+	/// Количество элементов.
+	/// </summary>
+	int Count;
 };
 
 /// <summary>
@@ -30,7 +35,7 @@ Stack* CreateStack(int size);
 /// <summary>
 /// Инциализация стека.
 /// </summary>
-void InitializationStack(Stack* stack);
+void InitializationStack(Stack* stack, int size);
 
 /// <summary>
 /// Изменение размерности стека.
@@ -54,11 +59,11 @@ void Pop(Stack* stack);
 bool IsEmpty(Stack* stack);
 
 /// <summary>
-/// Удаление стек.
-/// </summary>
-void Delete(Stack* stack);
-
-/// <summary>
 /// Вывод стека.
 /// </summary>
 void PrintStack(Stack* stack);
+
+/// <summary>
+/// Удаление стек.
+/// </summary>
+void Delete(Stack* stack);
