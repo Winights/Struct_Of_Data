@@ -13,16 +13,7 @@ CircularBuffer* CreateCircularBuffer(int capacity)
     return circularBuffer;
 }
 
-void InitializationBuffer(CircularBuffer* circularBuffer, int size)
-{
-    circularBuffer->Size = size;
-    for (int i = 0; i < circularBuffer->Size; i++)
-    {
-        circularBuffer->Buffer[i] = 0;
-    }
-}
-
-void ResizeBuffer(CircularBuffer* circularBuffer, int newCapacity)
+void ResizeCircularBuffer(CircularBuffer* circularBuffer, int newCapacity)
 {
     circularBuffer->Capacity = newCapacity;
     int* newBuffer = new int[newCapacity];
@@ -46,40 +37,46 @@ int GetOccupiedSpace(CircularBuffer* circularBuffer)
     return circularBuffer->Size;
 }
 
-void AddElement(CircularBuffer* circularBuffer, int value)
+void Enqueue(CircularBuffer* circularBuffer, int value)
 {
     if (GetFreeSpace(circularBuffer) == 0)
     {
-        throw std::overflow_error("Кольцевой буфер заполнен");
+        std::cout << "Circular buffer is filled" << std::endl;
+        std::cout << std::endl;
     }
-
-    if (circularBuffer->Write >= circularBuffer->Capacity)
+    else
     {
-        circularBuffer->Write = 0;
-    }
+        if (circularBuffer->Write >= circularBuffer->Capacity)
+        {
+            circularBuffer->Write = 0;
+        }
 
-    circularBuffer->Buffer[circularBuffer->Write++] = value;
-    ++circularBuffer->Size;
+        circularBuffer->Buffer[circularBuffer->Write++] = value;
+        ++circularBuffer->Size;
+    }
 }
 
-int GetElement(CircularBuffer* circularBuffer)
+int Dequeue(CircularBuffer* circularBuffer)
 {
     if (circularBuffer->Size == 0)
     {
-        throw std::overflow_error("Кольцевой буфер пустой");
+        std::cout << "Circular buffer is empty" << std::endl;
+        std::cout << std::endl;
     }
-
-    if (circularBuffer->Read >= circularBuffer->Capacity)
+    else
     {
-        circularBuffer->Read = 0;
-    }
+        if (circularBuffer->Read >= circularBuffer->Capacity)
+        {
+            circularBuffer->Read = 0;
+        }
 
-    int value = circularBuffer->Buffer[circularBuffer->Read++];
-    --circularBuffer->Size;
-    return value;
+        int value = circularBuffer->Buffer[circularBuffer->Read++];
+        --circularBuffer->Size;
+        return value;
+    }
 }
 
-void DeleteBuffer(CircularBuffer* circularBuffer)
+void DeleteCircularBuffer(CircularBuffer* circularBuffer)
 {
     delete[] circularBuffer->Buffer;
     delete circularBuffer;

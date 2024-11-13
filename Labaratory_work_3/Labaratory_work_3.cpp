@@ -6,6 +6,7 @@
 #include "Stack.h"
 #include "CircularBuffer.h"
 #include "QueueCircularBuffer.h"
+#include "QueueStacks.h"
 
 using namespace std;
 
@@ -69,9 +70,12 @@ int main()
     int sizeOfCircular = GetInput("Enter size of circular buffer: ");
     cout << endl;
     CircularBuffer* circularBuffer = CreateCircularBuffer(sizeOfCircular);
-    int sizeOfQueueCircularBuffer = GetInput("Enter size of circular buffer: ");
+    int sizeOfQueueCircularBuffer = GetInput("Enter size of queue based on circular buffer: ");
     cout << endl;
     QueueCircularBuffer* queueCircularBuffer = CreateQueueCircularBuffer(sizeOfQueueCircularBuffer);
+    int sizeOfQueueStack = GetInput("Enter size of queue based on 2 stacks: ");
+    cout << endl;
+    QueueStacks* queueStacks = CreateQueueStacks(sizeOfQueueStack);
 
     cout << endl;
 
@@ -90,6 +94,10 @@ int main()
         cout << "10. Add element to queue based on circular buffer \n";
         cout << "11. Get element from queue based on circular buffer \n";
         cout << "12. Resize queue based on circular buffer \n";
+        cout << "13. Print queue based on two stacks \n";
+        cout << "14. Add element to queue based on two stacks \n";
+        cout << "15. Get element from queue based on two stacks \n";
+        cout << "16. Resize queue based on two stacks \n";
 
         int choice = GetInput("Your input: ");
 
@@ -113,7 +121,9 @@ int main()
         }
         case 3:
         {
-            Pop(stack);
+            int value = Pop(stack);
+            cout << endl;
+            cout << "Element received " << value << endl;
             cout << endl;
             PrintStack(stack);
             cout << endl;
@@ -124,7 +134,9 @@ int main()
             int size = GetInput("Enter new size of stack: ");
             if (size < 0)
             {
+                cout << endl;
                 cout << "Size must be positive number or not be zero" << endl;
+                cout << endl;
                 break;
             }
             else
@@ -148,14 +160,14 @@ int main()
         {
             int value = GetInput("Enter the value to add: ");
             cout << endl;
-            AddElement(circularBuffer, value);
+            Enqueue(circularBuffer, value);
             PrintCircularBuffer(circularBuffer);
             cout << endl;
             break;
         }
         case 7:
         {
-            int value = GetElement(circularBuffer);
+            int value = Dequeue(circularBuffer);
             cout << endl;
             cout << "Element received " << value << endl;
             cout << endl;
@@ -168,12 +180,14 @@ int main()
             int size = GetInput("Enter new size of circular buffer: ");
             if (size < 0)
             {
+                cout << endl;
                 cout << "Size must be positive number or not be zero" << endl;
+                cout << endl;
                 break;
             }
             else
             {
-                ResizeBuffer(circularBuffer, size);
+                ResizeCircularBuffer(circularBuffer, size);
                 cout << "Resize was complete" << endl;
                 cout << endl;
                 PrintCircularBuffer(circularBuffer);
@@ -184,7 +198,7 @@ int main()
         case 9:
         {
             cout << endl;
-            PrintQueue(queueCircularBuffer);
+            PrintQueueCircularBuffer(queueCircularBuffer);
             cout << endl;
             break;
         }
@@ -192,18 +206,18 @@ int main()
         {
             int value = GetInput("Enter the value to add: ");
             cout << endl;
-            Enqueue(queueCircularBuffer, value);
-            PrintQueue(queueCircularBuffer);
+            EnqueueQueueCircularBuffer(queueCircularBuffer, value);
+            PrintQueueCircularBuffer(queueCircularBuffer);
             cout << endl;
             break;
         }
         case 11:
         {
-            int value = Dequeue(queueCircularBuffer);
+            int value = DequeueQueueCircularBuffer(queueCircularBuffer);
             cout << endl;
             cout << "Element received " << value << endl;
             cout << endl;
-            PrintQueue(queueCircularBuffer);
+            PrintQueueCircularBuffer(queueCircularBuffer);
             cout << endl;
             break;
         }
@@ -212,7 +226,9 @@ int main()
             int size = GetInput("Enter new size of circular buffer: ");
             if (size < 0)
             {
+                cout << endl;
                 cout << "Size must be positive number or not be zero" << endl;
+                cout << endl;
                 break;
             }
             else
@@ -221,18 +237,69 @@ int main()
                 cout << endl;
                 cout << "Resize was complete" << endl;
                 cout << endl;
-                PrintQueue(queueCircularBuffer);
+                PrintQueueCircularBuffer(queueCircularBuffer);
+                cout << endl;
+                break;
+            }
+        }
+        case 13:
+        {
+            cout << endl;
+            PrintQueueStacks(queueStacks);
+            cout << endl;
+            break;
+        }
+        case 14:
+        {
+            int value = GetInput("Enter the value to add: ");
+            cout << endl;
+            EnqueueQueueStacks(queueStacks, value);
+            PrintQueueStacks(queueStacks);
+            cout << endl;
+            break;
+        }
+        case 15:
+        {
+            int value = DequeueQueueStacks(queueStacks);
+            cout << endl;
+            cout << "Element received " << value << endl;
+            cout << endl;
+            PrintQueueStacks(queueStacks);
+            cout << endl;
+            break;
+        }
+        case 16:
+        {
+            int size = GetInput("Enter new size of circular buffer: ");
+            if (size < 0)
+            {
+                cout << endl;
+                cout << "Size must be positive number or not be zero" << endl;
+                cout << endl;
+                break;
+            }
+            else
+            {
+                ResizeQueueStacks(queueStacks, size);
+                cout << endl;
+                cout << "Resize was complete" << endl;
+                cout << endl;
+                PrintQueueStacks(queueStacks);
                 cout << endl;
                 break;
             }
         }
         default:
+        {
             cout << "Unknown command. Try entering the command again";
         }
-            
+
+        }       
     }
     Delete(stack);
-    DeleteBuffer(circularBuffer);
+    DeleteCircularBuffer(circularBuffer);
+    DeleteQueueCircularBuffer(queueCircularBuffer);
+    DeleteQueueStacks(queueStacks);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

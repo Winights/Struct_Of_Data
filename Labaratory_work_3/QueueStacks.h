@@ -1,45 +1,50 @@
 ﻿#pragma once
-#include "CircularBuffer.h"
+#include "Stack.h"
 
 /// <summary>
-/// Структура очереди через кольцевой буфер.
+/// Структура очереди через 2 стека.
 /// </summary>
-struct QueueCircularBuffer
+struct QueueStacks
 {
 	/// <summary>
-	/// Кольцевой буфер.
+	/// Cтек для добавления.
 	/// </summary>
-	CircularBuffer* CircularBuffer;
+	Stack* TopStack;
+
+	/// <summary>
+	/// Cтек для удаления.
+	/// </summary>
+	Stack* TailStack;
 };
 
 /// <summary>
 /// Создание очереди.
 /// </summary>
 /// <returns>Созданный очередь</returns>
-QueueCircularBuffer* CreateQueueCircularBuffer(int capacity);
+QueueStacks* CreateQueueStacks(int capacity);
 
 /// <summary>
 /// Добавление элемента в очередь.
 /// </summary>
-void EnqueueQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer, int value);
+void EnqueueQueueStacks(QueueStacks* queueStacks, int value);
 
 /// <summary>
 /// Получение элемента из очереди.
 /// </summary>
 /// <returns>Элемент из очереди</returns>
-int DequeueQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer);
+int DequeueQueueStacks(QueueStacks* queueStacks);
 
 /// <summary>
 /// Изменение размерности очереди.
 /// </summary>
-void ResizeQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer, int newCapacity);
+void ResizeQueueStacks(QueueStacks* queueStacks, int newCapacity);
 
 /// <summary>
 /// Вывод очереди.
 /// </summary>
-void PrintQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer);
+void PrintQueueStacks(QueueStacks* queueStacks);
 
 /// <summary>
 /// Удаление очереди.
 /// </summary>
-void DeleteQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer);
+void DeleteQueueStacks(QueueStacks* queueStacks);

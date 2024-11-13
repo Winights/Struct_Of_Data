@@ -27,7 +27,7 @@
     <ClCompile Include="QueueCircularBuffer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="QueueStack.cpp">
+    <ClCompile Include="QueueStacks.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClInclude Include="QueueCircularBuffer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="QueueStack.h">
+    <ClInclude Include="QueueStacks.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

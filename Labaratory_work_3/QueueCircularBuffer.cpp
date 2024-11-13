@@ -1,4 +1,4 @@
-#include "QueueCircularBuffer.h"
+﻿#include "QueueCircularBuffer.h"
 #include "CircularBuffer.h"
 #include <iostream>
 
@@ -9,22 +9,22 @@ QueueCircularBuffer* CreateQueueCircularBuffer(int capacity)
     return queueCircularBuffer;
 }
 
-void Enqueue(QueueCircularBuffer* queueCircularBuffer, int value)
+void EnqueueQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer, int value)
 {
-    AddElement(queueCircularBuffer->CircularBuffer, value);;
+    Enqueue(queueCircularBuffer->CircularBuffer, value);;
 }
 
-int Dequeue(QueueCircularBuffer* queueCircularBuffer)
+int DequeueQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer)
 {
-    return GetElement(queueCircularBuffer->CircularBuffer);
+    return Dequeue(queueCircularBuffer->CircularBuffer);
 }
 
 void ResizeQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer, int newCapacity)
 {
-    ResizeBuffer(queueCircularBuffer->CircularBuffer, newCapacity);
+    ResizeCircularBuffer(queueCircularBuffer->CircularBuffer, newCapacity);
 }
 
-void PrintQueue(QueueCircularBuffer* queueCircularBuffer)
+void PrintQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer)
 {
     int index = queueCircularBuffer->CircularBuffer->Read;
     for (int i = 0; i < queueCircularBuffer->CircularBuffer->Size; i++) 
@@ -35,9 +35,8 @@ void PrintQueue(QueueCircularBuffer* queueCircularBuffer)
     std::cout << std::endl;
 }
 
-void DeleteBuffer(QueueCircularBuffer* queueCircularBuffer)
+void DeleteQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer)
 {
-    delete[] queueCircularBuffer->CircularBuffer->Buffer;
-    delete queueCircularBuffer->CircularBuffer;
+    DeleteCircularBuffer(queueCircularBuffer->CircularBuffer);
     delete queueCircularBuffer;
 }

@@ -33,11 +33,6 @@ struct Stack
 Stack* CreateStack(int size);
 
 /// <summary>
-/// Инциализация стека.
-/// </summary>
-void InitializationStack(Stack* stack, int size);
-
-/// <summary>
 /// Изменение размерности стека.
 /// </summary>
 void ResizeStack(Stack* stack, int newSize);
@@ -50,7 +45,7 @@ void Push(Stack* stack, int value);
 /// <summary>
 /// Удаление из стека.
 /// </summary>
-void Pop(Stack* stack);
+int Pop(Stack* stack);
 
 /// <summary>
 /// Проверка пустой ли стек.
