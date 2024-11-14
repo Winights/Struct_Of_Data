@@ -26,13 +26,7 @@ void ResizeQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer, int new
 
 void PrintQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer)
 {
-    int index = queueCircularBuffer->CircularBuffer->Read;
-    for (int i = 0; i < queueCircularBuffer->CircularBuffer->Size; i++) 
-    {
-        std::cout << queueCircularBuffer->CircularBuffer->Buffer[index] << " ";
-        index = (index + 1) % queueCircularBuffer->CircularBuffer->Capacity;
-    }
-    std::cout << std::endl;
+    PrintCircularBuffer(queueCircularBuffer->CircularBuffer);
 }
 
 void DeleteQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer)

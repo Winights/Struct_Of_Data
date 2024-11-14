@@ -18,6 +18,7 @@ void EnqueueQueueStacks(QueueStacks* queueStacks, int value)
 {
     if (IsFull(queueStacks->TopStack) == 0)
     {
+        std::cout << std::endl;
         std::cout << "Queue is filled" << std::endl;
         std::cout << std::endl;
     }
@@ -56,14 +57,14 @@ void PrintQueueStacks(QueueStacks* queueStacks)
     for (int i = queueStacks->TailStack->Count - 1; i > -1; i--)
     {
         tempStack->Buffer[i] = queueStacks->TailStack->Buffer[i];
-        index = (index + 1) % queueStacks->TailStack->BufferSize;
+        index++;
         tempStack->Count++;
     }
 
     for (int i = 0; i < queueStacks->TopStack->Count; i++)
     {
         tempStack->Buffer[index] = queueStacks->TopStack->Buffer[i];
-        index = (index + 1) % queueStacks->TopStack->BufferSize;
+        index++;
         tempStack->Count++;
     }
 

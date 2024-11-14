@@ -57,7 +57,9 @@ int GetInput(const string& prompt)
     }
     else 
     {
+        cout << endl;
         std::cout << "Unknown command. Try entering the command again." << std::endl;
+        cout << endl;
         return GetInput(prompt);
     }
     
@@ -113,128 +115,110 @@ int main()
         cout << "Select the action you want to do: \n";
         cout << "1. Insert an element at the beginning \n";
         cout << "2. Insert an element at the end \n";
-        cout << "3. Insert after a certain element \n";
-        cout << "4. Insert element after a certain element \n";
-        cout << "5. Insert element before a certain element \n";
-        cout << "6. Remove an element at the beginning \n";
-        cout << "7. Remove an element at the end \n";
-        cout << "8. Remove an element by index from an list \n";
-        cout << "9. Remove an element by value from an list \n";
-        cout << "10. Sort array \n";
-        cout << "11. Linear search for an element in an list \n";
+        cout << "3. Insert element after a certain element \n";
+        cout << "4. Insert element before a certain element \n";
+        cout << "5. Remove an element at the beginning \n";
+        cout << "6. Remove an element at the end \n";
+        cout << "8. Remove an element by value from an list \n";
+        cout << "9. Sort array \n";
+        cout << "10. Linear search for an element in an list \n";
 
         int choice = GetInput("Your input: ");
 
         switch (choice)
         {
-        case 1:
-        {
-            int value = GetInput("Enter the element to insert it at the beginning: ");
-            cout << endl;
-            AddToBegin(linkedList, value);
-            PrintList(linkedList);
-            cout << endl;
-            break;
-        }
-        case 2:
-        {
-            int value = GetInput("Enter the element to insert it at the end: ");
-            cout << endl;
-            AddToEnd(linkedList, value);
-            cout << endl;
-            PrintList(linkedList);
-            cout << endl;
-            break;
-        }
-        case 3:
-        {
-            int index = GetInput("Enter the index where you want to insert the value: ");
-            int value = GetInput("Enter the value you want to insert: ");
-            cout << endl;
-            InsertByIndex(linkedList, index, value);
-            PrintList(linkedList);
-            std::cout << std::endl;
-            cout << endl;
-            break;
-        }
-        case 4:
-        {
-            int target = GetInput("Enter the value which after you want to insert the value: ");
-            int value = GetInput("Enter the value you want to insert: ");
-            cout << endl;
-            InsertByValueAfter(linkedList, value, target);
-            PrintList(linkedList);
-            std::cout << std::endl;
-            cout << endl;
-            break;
-        }
-        case 5:
-        {
-            int target = GetInput("Enter the value which before you want to insert the value: ");
-            int value = GetInput("Enter the value you want to insert: ");
-            cout << endl;
-            InsertByValueBefore(linkedList, value, target);
-            PrintList(linkedList);
-            std::cout << std::endl;
-            cout << endl;
-            break;
-        }
-        case 6:
-        {
-            cout << endl;
-            RemoveToBegin(linkedList);
-            cout << "Element is deleted " << endl;
-            PrintList(linkedList);
-            cout << endl;
-            break;
-        }
-        case 7:
-        {
-            cout << endl;
-            RemoveToEnd(linkedList);
-            cout << "Element is deleted " << endl;
-            PrintList(linkedList);
-            cout << endl;
-            break;
-        }
-        case 8:
-        {
-            int index = GetInput("Enter the index of element to delete: ");
-            cout << endl;
-            RemoveByIndex(linkedList, index);
-            PrintList(linkedList);
-            cout << endl;
-            break;
-        }
-        case 9:
-        {
-            int value = GetInput("Enter the index of element to delete: ");
-            cout << endl;
-            RemoveByValue(linkedList, value);
-            PrintList(linkedList);
-            cout << endl;
-            break;
-        }
-        case 10:
-        {
-            SortList(linkedList);
-            cout << "List is sorted " << endl;
-            cout << endl;
-            PrintList(linkedList);
-            cout << endl;
-            break;
-        }
-        case 11:
-        {
-            int value = GetInput("Enter the value you want to find in the array: ");
-            cout << endl;
-            LinerSearch(linkedList, value);
-            PrintList(linkedList);
-            cout << endl;
-            break;
-        }
-        default:
-            cout << "Unknown command. Try entering the command again";
+            case 1:
+            {
+                int value = GetInput("Enter the element to insert it at the beginning: ");
+                cout << endl;
+                InsertBegin(linkedList, value);
+                PrintList(linkedList);
+                cout << endl;
+                break;
+            }
+            case 2:
+            {
+                int value = GetInput("Enter the element to insert it at the end: ");
+                cout << endl;
+                InsertEnd(linkedList, value);
+                cout << endl;
+                PrintList(linkedList);
+                cout << endl;
+                break;
+            }
+            case 3:
+            {
+                int target = GetInput("Enter the value which after you want to insert the value: ");
+                int value = GetInput("Enter the value you want to insert: ");
+                cout << endl;
+                InsertByValueAfter(linkedList, value, target);
+                PrintList(linkedList);
+                std::cout << std::endl;
+                cout << endl;
+                break;
+            }
+            case 4:
+            {
+                int target = GetInput("Enter the value which before you want to insert the value: ");
+                int value = GetInput("Enter the value you want to insert: ");
+                cout << endl;
+                InsertByValueBefore(linkedList, value, target);
+                PrintList(linkedList);
+                std::cout << std::endl;
+                cout << endl;
+                break;
+            }
+            case 5:
+            {
+                cout << endl;
+                RemoveBegin(linkedList);
+                cout << "Element is deleted " << endl;
+                PrintList(linkedList);
+                cout << endl;
+                break;
+            }
+            case 6:
+            {
+                cout << endl;
+                RemoveEnd(linkedList);
+                cout << "Element is deleted " << endl;
+                PrintList(linkedList);
+                cout << endl;
+                break;
+            }
+            case 8:
+            {
+                int value = GetInput("Enter the value of element to delete: ");
+                cout << endl;
+                RemoveByValue(linkedList, value);
+                PrintList(linkedList);
+                cout << endl;
+                break;
+            }
+            case 9:
+            {
+                BubbleSort(linkedList);
+                cout << "List is sorted " << endl;
+                cout << endl;
+                PrintList(linkedList);
+                cout << endl;
+                break;
+            }
+            case 10:
+            {
+                int value = GetInput("Enter the value you want to find in the array: ");
+                cout << endl;
+                LinerSearch(linkedList, value);
+                PrintList(linkedList);
+                cout << endl;
+                break;
+            }
+            default:
+            {
+                cout << endl;
+                cout << "Unknown command. Try entering the command again";
+                cout << endl;
+            }
         }
     }
     FreeList(linkedList);

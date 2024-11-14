@@ -6,7 +6,7 @@ Stack* CreateStack(int size)
 {
     Stack* stack = new Stack;
     stack->BufferSize = size;
-    stack->Buffer = new int[stack->BufferSize];
+    stack->Buffer = new int[size];
     stack->Count = 0;
     stack->Top = -1;
     return stack;
@@ -28,7 +28,7 @@ void ResizeStack(Stack* stack, int newSize)
 
 void Push(Stack* stack, int data)
 {
-    if (stack->Top >= stack->BufferSize)
+    if (stack->Count >= stack->BufferSize)
     {
         std::cout << "Stack is filled" << std::endl;
         std::cout << std::endl;
@@ -45,6 +45,7 @@ int Pop(Stack* stack)
 {
     if (IsEmpty(stack))
     {
+        std::cout << std::endl;
         std::cout << "Stack is empty" << std::endl;
         std::cout << std::endl;
     }

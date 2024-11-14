@@ -41,6 +41,7 @@ void Enqueue(CircularBuffer* circularBuffer, int value)
 {
     if (GetFreeSpace(circularBuffer) == 0)
     {
+        std::cout << std::endl;
         std::cout << "Circular buffer is filled" << std::endl;
         std::cout << std::endl;
     }
@@ -60,6 +61,7 @@ int Dequeue(CircularBuffer* circularBuffer)
 {
     if (circularBuffer->Size == 0)
     {
+        std::cout << std::endl;
         std::cout << "Circular buffer is empty" << std::endl;
         std::cout << std::endl;
     }

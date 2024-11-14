@@ -21,11 +21,11 @@ void InitializationLinkedList(LinkedList* list, int size)
     for (int i = 0; i < size; i++)
     {
         int value = rand() % 21;
-        AddToEnd(list, value);
+        InsertEnd(list, value);
     }
 }
 
-void AddToBegin(LinkedList* list, int value)
+void InsertBegin(LinkedList* list, int value)
 {
     Node* NewNode = CreateLinkedListItem();
     NewNode->Data = value;
@@ -47,7 +47,7 @@ void AddToBegin(LinkedList* list, int value)
     
 }
 
-void AddToEnd(LinkedList* list, int value)
+void InsertEnd(LinkedList* list, int value)
 {
     Node* NewNode = CreateLinkedListItem();
     NewNode->Data = value;
@@ -84,7 +84,7 @@ Node* GetElement(LinkedList* list, int index)
     return currentNode;
 }
 
-void RemoveToBegin(LinkedList* list)
+void RemoveBegin(LinkedList* list)
 {
     if (list->Head == nullptr)
     {
@@ -108,7 +108,7 @@ void RemoveToBegin(LinkedList* list)
 }
 
 
-void RemoveToEnd(LinkedList* list) 
+void RemoveEnd(LinkedList* list) 
 {
     if (list->Tail == nullptr)
     {
@@ -212,14 +212,14 @@ void InsertByIndex(LinkedList* list, int index, int value)
     Node* right = GetElement(list, index);
     if (right->Next == nullptr)
     {
-        AddToEnd(list, value);
+        InsertEnd(list, value);
         return;
     }       
 
     Node* left = right->Prev;
     if (left == nullptr)
     {
-        AddToBegin(list, value);
+        InsertBegin(list, value);
         return;
     }
 
@@ -383,6 +383,33 @@ void SortList(LinkedList* list)
     list->Head = MergeSort(list->Head);
 }
 
+void BubbleSort(LinkedList* list)
+{
+    if (!list->Head)
+    {
+        return;
+    }
+
+    bool swapped;
+    do 
+    {
+        swapped = false;
+        Node* current = list->Head;
+        while (current->Next) 
+        {
+            if (current->Data > current->Next->Data) 
+            {
+                int temp = current->Data;
+                current->Data = current->Next->Data;
+                current->Next->Data = temp;
+                swapped = true;
+            }
+            current = current->Next;
+        }
+    }
+    while (swapped);
+}
+
 void LinerSearch(LinkedList* list, int value)
 {
     bool flag = false;
@@ -411,12 +438,11 @@ void PrintList(LinkedList* list)
     cout << endl;
 }
 
-
 void FreeList(LinkedList* list)
 {
     while (list->Head != nullptr)
     {
-        RemoveToBegin(list);
+        RemoveBegin(list);
     }
     delete list;
 }

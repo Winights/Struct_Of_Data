@@ -39,14 +39,14 @@ void InitializationLinkedList(LinkedList* list, int size);
 /// </summary>
 /// <param name="list">Структура двухсвязного списка.</param>
 /// <param name="value">Значение.</param>
-void AddToBegin(LinkedList* list, int value);
+void InsertBegin(LinkedList* list, int value);
 
 /// <summary>
 /// Добавление элемента в конец списка.
 /// </summary>
 /// <param name="list">Структура двухсвязного списка.</param>
 /// <param name="value">Значение.</param>
-void AddToEnd(LinkedList* list, int value);
+void InsertEnd(LinkedList* list, int value);
 
 /// <summary>
 /// Получение элемента из списка.
@@ -59,13 +59,13 @@ Node* GetElement(LinkedList* list, int index);
 /// Удалить в начале списка.
 /// </summary>
 /// <param name="list">Структура двухсвязного списка.</param>
-void RemoveToBegin(LinkedList* list);
+void RemoveBegin(LinkedList* list);
 
 /// <summary>
 /// Удалить в конце списка.
 /// </summary>
 /// <param name="list">Структура двухсвязного списка.</param>
-void RemoveToEnd(LinkedList* list);
+void RemoveEnd(LinkedList* list);
 
 /// <summary>
 /// Вставить элемент в список по индексу.
@@ -129,5 +129,11 @@ void PrintList(LinkedList* list);
 /// </summary>
 /// <param name="list">Структура двухсвязного списка.</param>
 void FreeList(LinkedList* list);
+
+/// <summary>
+/// Сортировка списка пузырьком.
+/// </summary>
+/// <param name="list">Структура двухсвязного списка.</param
+void BubbleSort(LinkedList* list);
 
 
