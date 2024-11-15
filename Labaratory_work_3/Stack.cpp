@@ -12,6 +12,18 @@ Stack* CreateStack(int size)
     return stack;
 }
 
+void InitializationStack(Stack* stack, int size)
+{
+    srand(time(0));
+
+    for (int i = size-1; i > -1; i--)
+    {
+        stack->Buffer[i] = rand() % 21;
+        ++stack->Count;
+        ++stack->Top;
+    }
+}
+
 void ResizeStack(Stack* stack, int newSize)
 {
     stack->BufferSize = newSize;
@@ -64,7 +76,7 @@ bool IsEmpty(Stack* stack)
 }
 
 
-void Delete(Stack* stack)
+void DeleteStack(Stack* stack)
 {
     delete[] stack->Buffer;
     delete stack;

@@ -9,6 +9,11 @@ QueueStacks* CreateQueueStacks(int capacity)
     return queueStacks;
 }
 
+void InitializationQueueStacks(QueueStacks* queueStacks, int size)
+{
+    InitializationStack(queueStacks->TopStack, size);
+}
+
 int IsFull(Stack* stack)
 {
     return stack->BufferSize - stack->Count;
@@ -56,7 +61,7 @@ void PrintQueueStacks(QueueStacks* queueStacks)
 
     for (int i = queueStacks->TailStack->Count - 1; i > -1; i--)
     {
-        tempStack->Buffer[i] = queueStacks->TailStack->Buffer[i];
+        tempStack->Buffer[index] = queueStacks->TailStack->Buffer[i];
         index++;
         tempStack->Count++;
     }
@@ -78,7 +83,7 @@ void PrintQueueStacks(QueueStacks* queueStacks)
 
 void DeleteQueueStacks(QueueStacks* queueStacks)
 {
-    Delete(queueStacks->TopStack);
-    Delete(queueStacks->TailStack);
+    DeleteStack(queueStacks->TopStack);
+    DeleteStack(queueStacks->TailStack);
     delete queueStacks;
 }

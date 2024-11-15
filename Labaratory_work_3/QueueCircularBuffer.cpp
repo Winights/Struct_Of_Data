@@ -9,6 +9,11 @@ QueueCircularBuffer* CreateQueueCircularBuffer(int capacity)
     return queueCircularBuffer;
 }
 
+void InitializationQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer, int size)
+{
+    InitializationCircularBuffer(queueCircularBuffer->CircularBuffer, size);
+}
+
 void EnqueueQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer, int value)
 {
     Enqueue(queueCircularBuffer->CircularBuffer, value);;

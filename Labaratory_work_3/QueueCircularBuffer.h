@@ -15,8 +15,15 @@ struct QueueCircularBuffer
 /// <summary>
 /// Создание очереди.
 /// </summary>
-/// <returns>Созданный очередь</returns>
+/// <returns>Созданная очередь</returns>
 QueueCircularBuffer* CreateQueueCircularBuffer(int capacity);
+
+/// <summary>
+/// Инциализация очереди случайными значениями.
+/// </summary>
+/// <param name="stack">Структура очереди.</param>
+/// <param name="size">Размер заполнения.</param>
+void InitializationQueueCircularBuffer(QueueCircularBuffer* queueCircularBuffer, int size);
 
 /// <summary>
 /// Добавление элемента в очередь.

@@ -38,6 +38,13 @@ struct CircularBuffer
 CircularBuffer* CreateCircularBuffer(int capacity);
 
 /// <summary>
+/// Инциализация кольцевого буфера случайными значениями.
+/// </summary>
+/// <param name="stack">Структура кольцевого буфера.</param>
+/// <param name="size">Размер заполнения.</param>
+void InitializationCircularBuffer(CircularBuffer* circularBuffer, int size);
+
+/// <summary>
 /// Изменение размерности буфера.
 /// </summary>
 void ResizeCircularBuffer(CircularBuffer* circularBuffer, int newCapacity);

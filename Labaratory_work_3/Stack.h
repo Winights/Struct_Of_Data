@@ -33,6 +33,13 @@ struct Stack
 Stack* CreateStack(int size);
 
 /// <summary>
+/// Инциализация стека случайными значениями.
+/// </summary>
+/// <param name="stack">Структура стека.</param>
+/// <param name="size">Размер заполнения.</param>
+void InitializationStack(Stack* stack, int size);
+
+/// <summary>
 /// Изменение размерности стека.
 /// </summary>
 void ResizeStack(Stack* stack, int newSize);
@@ -50,7 +57,7 @@ int Pop(Stack* stack);
 /// <summary>
 /// Проверка пустой ли стек.
 /// </summary>
-/// <returns>true, если пустой, иначе false.</returns>
+/// <returns>True, если пустой, иначе false.</returns>
 bool IsEmpty(Stack* stack);
 
 /// <summary>
@@ -59,6 +66,6 @@ bool IsEmpty(Stack* stack);
 void PrintStack(Stack* stack);
 
 /// <summary>
-/// Удаление стек.
+/// Удаление стека.
 /// </summary>
-void Delete(Stack* stack);
+void DeleteStack(Stack* stack);

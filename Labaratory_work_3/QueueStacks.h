@@ -12,7 +12,7 @@ struct QueueStacks
 	Stack* TopStack;
 
 	/// <summary>
-	/// Cтек для удаления.
+	/// Cтек для получения.
 	/// </summary>
 	Stack* TailStack;
 };
@@ -20,8 +20,15 @@ struct QueueStacks
 /// <summary>
 /// Создание очереди.
 /// </summary>
-/// <returns>Созданный очередь</returns>
+/// <returns>Созданная очередь</returns>
 QueueStacks* CreateQueueStacks(int capacity);
+
+/// <summary>
+/// Инциализация очереди случайными значениями.
+/// </summary>
+/// <param name="stack">Структура очереди.</param>
+/// <param name="size">Размер заполнения.</param>
+void InitializationQueueStacks(QueueStacks* queueStacks, int size);
 
 /// <summary>
 /// Добавление элемента в очередь.

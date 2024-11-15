@@ -25,13 +25,14 @@ struct LinkedList
 /// <summary>
 /// Создание двухсвязного списка.
 /// </summary>
-/// <returns>Возвращает созданный двухсвязный спискок</returns>
+/// <returns>Созданный двухсвязный список</returns>
 LinkedList* CreateLinkedList();
 
 /// <summary>
 /// Инциализация списка случайными значениями.
 /// </summary>
 /// <param name="array">Структура двухсвязного списка.</param>
+/// <param name="size">Размер заполнения.</param>
 void InitializationLinkedList(LinkedList* list, int size);
 
 /// <summary>
@@ -53,6 +54,7 @@ void InsertEnd(LinkedList* list, int value);
 /// </summary>
 /// <param name="list">Структура двухсвязного списка.</param>
 /// <param name="index">Индекс элемента.</param>
+/// <returns>Узел.</returns>
 Node* GetElement(LinkedList* list, int index);
 
 /// <summary>

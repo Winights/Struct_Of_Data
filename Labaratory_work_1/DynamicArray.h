@@ -35,13 +35,14 @@ const  int growthFactor = 2;
 /// <summary>
 /// Создание динамического массива.
 /// </summary>
-/// <returns>Возвращает созданный динамический массив с начальным размером</returns>
+/// <returns>Созданный динамический массив с начальным размером</returns>
 DynamicArray* CreateDynamicArray();
 
 /// <summary>
 /// Инциализация массива случайными значениями.
 /// </summary>
 /// <param name="array">Структура динамического массива.</param>
+/// <param name="size">Размер заполнения.</param>
 void InitializationDynamicArray(DynamicArray* array);
 
 /// <summary>
@@ -56,7 +57,7 @@ void ResizeArray(DynamicArray* array, int capacity);
 /// </summary>
 /// <param name="array">Структура динамического массива.</param>
 /// <param name="index">Индекс массива.</param>
-/// <returns>Возвращает false, если значение выходит за рамки допустимого диапозона, иначе true.</returns>
+/// <returns>False, если значение выходит за рамки допустимого диапозона, иначе true.</returns>
 bool CheckRange(DynamicArray* array, int index);
 
 /// <summary>
@@ -92,7 +93,7 @@ void SortArray(DynamicArray* array);
 /// </summary>
 /// <param name="array">Структура динамического массива.</param>
 /// <param name="index">Значение элемента.</param>
-/// <returns>Возвращает индекс искомого элемента.</returns>
+/// <returns>Индекс искомого элемента.</returns>
 void LinerSearch(DynamicArray* array, int value);
 
 /// <summary>
@@ -100,7 +101,7 @@ void LinerSearch(DynamicArray* array, int value);
 /// </summary>
 /// <param name="array">Структура динамического массива.</param>
 /// <param name="index">Значение элемента.</param>
-/// <returns>Возвращает индекс искомого элемента.</returns>
+/// <returns>Индекс искомого элемента.</returns>
 void BinarySearch(DynamicArray* array, int value);
 
 /// <summary>

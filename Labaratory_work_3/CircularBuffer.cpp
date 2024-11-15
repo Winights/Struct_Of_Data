@@ -13,6 +13,18 @@ CircularBuffer* CreateCircularBuffer(int capacity)
     return circularBuffer;
 }
 
+void InitializationCircularBuffer(CircularBuffer* circularBuffer, int size)
+{
+    srand(time(0));
+
+    for (int i = 0; i < size; i++)
+    {
+        circularBuffer->Buffer[i] = rand() % 21;
+        ++circularBuffer->Size;
+        ++circularBuffer->Write;
+    }
+}
+
 void ResizeCircularBuffer(CircularBuffer* circularBuffer, int newCapacity)
 {
     circularBuffer->Capacity = newCapacity;

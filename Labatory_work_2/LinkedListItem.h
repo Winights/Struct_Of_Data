@@ -6,7 +6,7 @@
 struct Node
 {
 	/// <summary>
-	/// Элемент.
+	/// Значение элемента.
 	/// </summary>
 	int Data;
 
@@ -24,5 +24,5 @@ struct Node
 /// <summary>
 /// Создание узла двухсвязного списка.
 /// </summary>
-/// <returns>Возвращает созданный узла.</returns>
+/// <returns>Созданный узел.</returns>
 Node* CreateLinkedListItem();

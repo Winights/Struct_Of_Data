@@ -14,7 +14,7 @@ using namespace std;
 /// Проверяет является ли строка числом.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
-/// <returns>Возвращает true, если является числом, иначе false.</returns>
+/// <returns>True, если является числом, иначе false.</returns>
 bool isNumber(const std::string& prompt)
 {
     if (prompt.empty())
@@ -44,7 +44,7 @@ bool isNumber(const std::string& prompt)
 /// Получение значения от пользователя.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
-/// <returns>Возвращает число</returns>
+/// <returns>Целое число</returns>
 int GetInput(const string& prompt)
 {
     string input;
@@ -93,15 +93,19 @@ int main()
     int sizeOfStack = PositiveSize("Enter size of stack: ");
     cout << endl;
     Stack* stack = CreateStack(sizeOfStack);
+    InitializationStack(stack, sizeOfStack - 1);
     int sizeOfCircular = PositiveSize("Enter size of circular buffer: ");
     cout << endl;
     CircularBuffer* circularBuffer = CreateCircularBuffer(sizeOfCircular);
+    InitializationCircularBuffer(circularBuffer, sizeOfCircular - 1);
     int sizeOfQueueCircularBuffer = PositiveSize("Enter size of queue based on circular buffer: ");
     cout << endl;
     QueueCircularBuffer* queueCircularBuffer = CreateQueueCircularBuffer(sizeOfQueueCircularBuffer);
+    InitializationQueueCircularBuffer(queueCircularBuffer, sizeOfQueueCircularBuffer - 1);
     int sizeOfQueueStacks = PositiveSize("Enter size of queue based on 2 stacks: ");
     cout << endl;
     QueueStacks* queueStacks = CreateQueueStacks(sizeOfQueueStacks);
+    InitializationQueueStacks(queueStacks, sizeOfQueueStacks - 1);
 
     cout << endl;
 
@@ -285,7 +289,7 @@ int main()
             }
         }       
     }
-    Delete(stack);
+    DeleteStack(stack);
     DeleteCircularBuffer(circularBuffer);
     DeleteQueueCircularBuffer(queueCircularBuffer);
     DeleteQueueStacks(queueStacks);

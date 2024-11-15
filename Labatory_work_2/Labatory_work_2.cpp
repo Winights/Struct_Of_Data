@@ -197,7 +197,7 @@ int main()
             }
             case 9:
             {
-                BubbleSort(linkedList);
+                SortList(linkedList);
                 cout << "List is sorted " << endl;
                 cout << endl;
                 PrintList(linkedList);

@@ -11,7 +11,7 @@ using namespace std;
 /// Проверяет является ли строка числом.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
-/// <returns>Возвращает true, если является числом, иначе false.</returns>
+/// <returns>True, если является числом, иначе false.</returns>
 bool isNumber(const std::string& prompt)
 {
     if (prompt.empty())
@@ -41,7 +41,7 @@ bool isNumber(const std::string& prompt)
 /// Получение значения от пользователя.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
-/// <returns>Возвращает число</returns>
+/// <returns>Целое число</returns>
 int GetInput(const string& prompt)
 {
     string input;
