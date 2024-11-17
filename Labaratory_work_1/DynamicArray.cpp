@@ -41,7 +41,7 @@ void ResizeArray(DynamicArray* array, int capacity)
 
 bool CheckRange(DynamicArray* array, int index)
 {
-	if (index < -1 || index > array->Size)
+	if (index < 0 || index > array->Size)
 	{
 		cout << "Index out of range.\n";
 		cout << endl;
