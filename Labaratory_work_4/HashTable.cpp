@@ -6,6 +6,16 @@
 #include <cstring>
 #include <string>
 
+LinkedList** CreateOverflowBuckets(HashTable* hashTable)
+{
+	LinkedList** buckets = new LinkedList*[hashTable->Size];
+	for (int i = 0; i < hashTable->Size; i++)
+	{
+		buckets[i] = NULL;
+	}
+	return buckets;
+}
+
 HashTable* CreateHashTable(int size)
 {
 	HashTable* hashTable = new HashTable;
@@ -14,55 +24,71 @@ HashTable* CreateHashTable(int size)
 	hashTable->Items = new HashNode*[hashTable->Size];
 	for (int i = 0; i < hashTable->Size; i++)
 	{
-		hashTable->Items[i] = NULL;
+		hashTable->Items[i] = CreateHashNode();
 	}
+	hashTable->OverflowBuckets = CreateOverflowBuckets(hashTable);
+
 	return hashTable;
 }
 
-unsigned char* CreateTablePearson()
+// Функция для вычисления НОД
+int Gsd(int a, int b) 
 {
-	unsigned char* table = new unsigned char[256];
-
-	// Заполнение массива значениями от 0 до 255
-	for (size_t i = 0; i < 256; ++i)
+	while (b != 0) 
 	{
-		table[i] = i;
+		int temp = b;
+		b = a % b;
+		a = temp;
 	}
-	//// Создание генератора случайных чисел
-	//// получить случайное число для задания начального значения
-	//std::random_device randomDevice;
-	//// инициализация генератора
-	//std::mt19937 generator(randomDevice());
-	//std::shuffle(table, table + 256, generator);
-
-	// Перемешивание таблицы
-	for (unsigned char i = 255; i > 0; --i) 
-	{
-		unsigned char j = rand() % (i + 1);
-		std::swap(table[i], table[j]);
-	}
-
-	return table;
+	return a;
 }
 
-int HashPearson(const std::string& key, unsigned char* table)
+int FindCompire(int size)
 {
-	//unsigned char hash = static_cast<unsigned char>(key.length() % 256);
+	int count = 0;
+
+	for (int i = 1; i < size; ++i)
+	{
+		if (Gsd(i, size) == 1)
+		{ 
+			count = i;
+		}
+	}
+
+	return count;
+}
+
+int HashPearson(std::string& key, int a, int size)
+{
 	int hashValue = 0;
+	int power = 1;
 	for (char i : key) 
 	{
-		/*hash = table[(hash + static_cast<unsigned char>(i)) % 256];*/
-		hashValue = table[hashValue ^ static_cast<unsigned char>(i)];
+		hashValue += i * power;
+		power *= a;
 	}
-	return hashValue;
+	return abs(hashValue % size);
 }
 
 void HandleCollision(HashTable* hashTable, int index, HashNode* hashNode)
 {
+	LinkedList* head = hashTable->OverflowBuckets[index];
 
+	if (head == NULL)
+	{
+		head = CreateLinkedList();
+		head->Node = hashNode;
+		hashTable->OverflowBuckets[index] = head;
+		return;
+	}
+	else
+	{
+		hashTable->OverflowBuckets[index] = LinkedListInsert(head, hashNode);
+		return;
+	}
 }
 
-void Insert(HashTable* hashTable, unsigned char* table, const char* key, const char* value)
+void Insert(HashTable* hashTable, std::string key, std::string value, int a)
 {
 	if (hashTable->Count == hashTable->Size)
 	{
@@ -72,59 +98,77 @@ void Insert(HashTable* hashTable, unsigned char* table, const char* key, const c
 	hashNode->Key = key;
 	hashNode->Value = value;
 
-	int index = HashPearson(key, table);
+	int index = HashPearson(key, a, hashTable->Size-1);
 
 	HashNode* currentNode = hashTable->Items[index];
 
-	if (currentNode == NULL)
+	if (currentNode->Key == "" && currentNode->Value == "")
 	{
 		hashTable->Items[index] = hashNode;
 		hashTable->Count++;
 	}
-	//else
-	//{
-	//	if (strcmp(currentNode->Key, key) == 0)
-	//	{
-	//		/*strcpy_s(value, hashTable->Items[index]->Value);*/
-	//		return;
-	//	}
-	//	else
-	//	{
-	//		HandleCollision(hashTable, index, hashNode);
-	//		return;
-	//	}
-	//}
+	else
+	{
+		HandleCollision(hashTable, index, hashNode);
+		return;
+		/*if (currentNode->Key == key)
+		{
+			hashTable->Items[index]->Value = value;
+			return;
+		}*/
+		/*else
+		{
+			HandleCollision(hashTable, index, hashNode);
+			return;
+		}*/
+	}
+
+	double loadFactor = (double)hashTable->Count / (double)hashTable->Size;
+
+	if (loadFactor > limitLoadfactor)
+	{
+
+	}
 }
 
-const char* Search(HashTable* hashTable, unsigned char* table, const char* key)
+void Remove(HashTable* hashTable, std::string key, int a)
 {
-	// Searches the key in the hashtable
-	// and returns NULL if it doesn't exist
-	int index = HashPearson(key, table);
-	HashNode* item = hashTable->Items[index];
+	
+}
 
-	// Ensure that we move to a non NULL item
-	if (item != NULL) 
+std::string Search(HashTable* hashTable, std::string key, int a)
+{
+	int index = HashPearson(key, a, hashTable->Size - 1);
+	HashNode* item = hashTable->Items[index];
+	LinkedList* head = hashTable->OverflowBuckets[index];
+
+	while (item->Key != "" && item->Value != "")
 	{
-		if (strcmp(item->Key, key) == 0)
+		if (item->Key == key)
 		{
 			return item->Value;
 		}
+		if (head == NULL)
+		{
+			return "";
+		}
+		item = head->Node;
+		head = head->Next;
 	}
-	return NULL;
+	return "";
 }
 
-void PrintSearch(HashTable* hashTable, unsigned char* table, const char* key)
+void PrintSearch(HashTable* hashTable, std::string key, int a)
 {
-	const char* val;
-	if ((val = Search(hashTable, table, key)) == NULL)
+	std::string val = Search(hashTable, key, a);
+	if (val == "")
 	{
-		printf("Key:%s does not exist\n", key);
+		std::cout << "Key: " << key <<" does not exist\n";
 		return;
 	}
 	else 
 	{
-		printf("Key:%s, Value:%s\n", key, val);
+		std::cout << "Key: " << key << " Value: " << val << "\n";
 	}
 }
 
@@ -137,9 +181,32 @@ void PrintTable(HashTable* hashTable)
 			std::cout << "Index: " << i << " " <<
 				"Key: " << hashTable->Items[i]->Key << " "
 				<< "Value: " << hashTable->Items[i]->Value << "\n";
+
+			if (hashTable->OverflowBuckets[i])
+			{
+				printf(" => Overflow Bucket => \n");
+				LinkedList* head = hashTable->OverflowBuckets[i];
+				
+				while (head)
+				{
+					std::cout << "Key: " << head->Node->Key << " "
+						<< "Value: " << head->Node->Value << "\n";
+					head = head->Next;
+				}
+			}
 		}
 	}
 	std::cout << std::endl;
+}
+
+void DeletetOverflowBuckets(HashTable* hashTable)
+{
+	LinkedList** buckets = hashTable->OverflowBuckets;
+	for (int i = 0; i < hashTable->Size; i++)
+	{
+		DeleteLinkedList(buckets[i]);
+	}
+	delete[] buckets;
 }
 
 void DeletetHashTable(HashTable* hashTable)
@@ -151,6 +218,7 @@ void DeletetHashTable(HashTable* hashTable)
 			DeletetHashNode(hashTable->Items[i]);
 		}
 	}
+	DeletetOverflowBuckets(hashTable);
 	delete[] hashTable->Items;
 	delete hashTable;
 }

@@ -4,8 +4,8 @@
 HashNode* CreateHashNode()
 {
 	HashNode* hashNode = new HashNode;
-	hashNode->Value = "0";
-	hashNode->Key = "0";
+	hashNode->Value = "";
+	hashNode->Key = "";
 
 	return hashNode;
 }

@@ -8,12 +8,13 @@ struct HashNode
 	/// <summary>
 	/// Значение.
 	/// </summary>
-	const char* Value;
+	std::string Value;
 
 	/// <summary>
 	/// Ключ.
 	/// </summary>
-	const char* Key;
+	std::string Key;
+
 };
 
 /// <summary>

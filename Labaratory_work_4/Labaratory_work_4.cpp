@@ -84,11 +84,25 @@ int PositiveSize(const string& prompt)
     }
 }
 
+/// <summary>
+/// Получение значения от пользователя.
+/// </summary>
+/// <param name="prompt">Введенные значения.</param>
+/// <returns>Целое число</returns>
+string GetInputString(const string& prompt)
+{
+    string input;
+    cout << prompt;
+    cin >> input;
+
+    return input;
+}
+
 int main()
 {
     int sizeOfHashTable = PositiveSize("Enter size of hash table: ");
-    HashTable* harshTable = CreateHashTable(sizeOfHashTable);
-    unsigned char* pearsonTable = CreateTablePearson();
+    HashTable* hashTable = CreateHashTable(sizeOfHashTable);
+    int a = FindCompire(hashTable->Size - 1);
 
     cout << endl;
 
@@ -104,25 +118,38 @@ int main()
         {
             case 1:
             {
-                string value;
-                cout <<"Enter the value to insert: ";
-                cin >> value;
+                string value = GetInputString("Enter the value to insert: ");
 
-                string key;
-                cout << "Enter the key to insert: ";
-                cin >> key;
+                string key = GetInputString("Enter the key to insert: ");
 
-                Insert(harshTable, pearsonTable, key.c_str(), value.c_str());
-                PrintTable(harshTable);
+                Insert(hashTable,"Biba", "AA", a);
+                Insert(hashTable, key, value, a);
+                cout << endl;
+                PrintTable(hashTable);
                 break;
             }
             case 2:
             {
-           
+                string key = GetInputString("Enter the key to find a element: ");
+
+                Search(hashTable, key, a);
+                cout << endl;
+                PrintTable(hashTable);
+                cout << endl;
+                PrintSearch(hashTable, key, a);
+                cout << endl;
+                break;
             }
             case 3:
             {
-            
+                string key = GetInputString("Enter the key to remove a element: ");
+                Remove(hashTable,key, a);
+                cout << endl;
+                PrintTable(hashTable);
+                cout << endl;
+                //int result = FindCompire(hashTable->Size-1);
+                //cout << result << endl;
+                //break;
             }
             case 4:
             {
