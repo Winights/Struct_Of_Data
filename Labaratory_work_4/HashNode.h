@@ -1,30 +1,31 @@
-#pragma once
+п»ї#pragma once
 #include <string>
+
 /// <summary>
-/// Структура узла.
+/// РЎС‚СЂСѓРєС‚СѓСЂР° СѓР·Р»Р°.
 /// </summary>
 struct HashNode
 {
 	/// <summary>
-	/// Значение.
+	/// Р—РЅР°С‡РµРЅРёРµ.
 	/// </summary>
 	std::string Value;
 
 	/// <summary>
-	/// Ключ.
+	/// РљР»СЋС‡.
 	/// </summary>
 	std::string Key;
 
 };
 
 /// <summary>
-/// Создание узла для хэш-таблицы.
+/// РЎРѕР·РґР°РЅРёРµ СѓР·Р»Р° С…РµС€-С‚Р°Р±Р»РёС†С‹.
 /// </summary>
-/// <returns>Созданный узел.</returns>
+/// <returns>РЎРѕР·РґР°РЅРЅС‹Р№ СѓР·РµР».</returns>
 HashNode* CreateHashNode();
 
 /// <summary>
-/// Удаление узла.
+/// РЈРґР°Р»РµРЅРёРµ СѓР·Р»Р°.
 /// </summary>
-/// <param name="hashNode">Структура узла хэш-таблицы.</param>
+/// <param name="hashNode">РЎС‚СЂСѓРєС‚СѓСЂР° СѓР·Р»Р° С…РµС€-С‚Р°Р±Р»РёС†С‹.</param>
 void DeletetHashNode(HashNode* hashNode);

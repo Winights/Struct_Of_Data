@@ -1,8 +1,14 @@
-#include "HashNode.h"
+﻿#include "HashNode.h"
 #include "HashTable.h"
 #include <iostream>
 #include <string>
+#include <cmath>
 
+/// <summary>
+/// Создание массива указателей.
+/// </summary>
+/// <param name="hashTable">Структура хеш-таблицы.</param>
+/// <returns>Созданный массив указателей.</returns>
 LinkedList** CreateOverflowBuckets(HashTable* hashTable)
 {
 	LinkedList** buckets = new LinkedList*[hashTable->Size];
@@ -28,7 +34,12 @@ HashTable* CreateHashTable(int size)
 	return hashTable;
 }
 
-// ������� ��� ���������� ���
+/// <summary>
+/// Вычисление НОД.
+/// </summary>
+/// <param name="a">Целое число, для которое хотим найти НОД.</param>
+/// <param name="b">Целое число, для котрого ищем НОД.</param>
+/// <returns>НОД.</returns>
 int Gsd(int a, int b) 
 {
 	while (b != 0) 
@@ -40,6 +51,11 @@ int Gsd(int a, int b)
 	return a;
 }
 
+/// <summary>
+/// Нахождение простого взаимного числа для длины массива.
+/// </summary>
+/// <param name="size">Длина массива.</param>
+/// <returns>Взаимно простое число.</returns>
 int FindCompire(int size)
 {
 	int count = 0;
@@ -55,6 +71,13 @@ int FindCompire(int size)
 	return count;
 }
 
+/// <summary>
+/// Хеш-функция - метод Пирсона.
+/// </summary>
+/// <param name="key">Ключ.</param>
+/// <param name="a">Взаимно простое число для длины массива.</param>
+/// <param name="size">Длина массива.</param>
+/// <returns>Значение для индекса.</returns>
 int HashPearson(std::string& key, int a, int size)
 {
 	int hashValue = 0;
@@ -71,20 +94,18 @@ void Rehashing(HashTable* hashTable)
 {
 	HashTable* newHashTable = CreateHashTable(hashTable->Size * growthFactor);
 
-	/*PrintTable(newHashTable);*/
-
 	for (int i = 0; i < hashTable->Size; i++)
 	{
 		if (hashTable->Items[i]->Key != "" && hashTable->Items[i]->Value != "")
 		{
-			Insert(newHashTable, hashTable->Items[i]->Key, hashTable->Items[i]->Value);
+			InsertInTable(newHashTable, hashTable->Items[i]->Key, hashTable->Items[i]->Value);
 			if (hashTable->OverflowBuckets[i])
 			{
 				LinkedList* head = hashTable->OverflowBuckets[i];
 
 				while (head)
 				{
-					Insert(newHashTable, head->Node->Key, head->Node->Value);
+					InsertInTable(newHashTable, head->Node->Key, head->Node->Value);
 					head = head->Next;
 				}
 			}
@@ -97,6 +118,12 @@ void Rehashing(HashTable* hashTable)
 	hashTable->Size = hashTable->Size * growthFactor;
 }
 
+/// <summary>
+/// Разрешение коллизий.
+/// </summary>
+/// <param name="hashTable">Структура хеш-таблицы.</param>
+/// <param name="index">Индекс.</param>
+/// <param name="hashNode">Структура узла хеш-таблицы.</param>
 void HandleCollision(HashTable* hashTable, int index, HashNode* hashNode)
 {
 	LinkedList* head = hashTable->OverflowBuckets[index];
@@ -110,12 +137,12 @@ void HandleCollision(HashTable* hashTable, int index, HashNode* hashNode)
 	}
 	else
 	{
-		hashTable->OverflowBuckets[index] = LinkedListInsert(head, hashNode);
+		hashTable->OverflowBuckets[index] = InsertInLinkedList(head, hashNode);
 		return;
 	}
 }
 
-void Insert(HashTable* hashTable, std::string key, std::string value)
+void InsertInTable(HashTable* hashTable, std::string key, std::string value)
 {
 	if (hashTable->Count == hashTable->Size)
 	{
@@ -141,7 +168,7 @@ void Insert(HashTable* hashTable, std::string key, std::string value)
 		if (currentNode->Key == key && currentNode->Value == value)
 		{
 			std::cout << std::endl;
-			std::cout << "Such a key and value are in the hash table" << std::endl;
+			std::cout << "Such a key and value are in the table" << std::endl;
 			return;
 		}
 		else
@@ -153,13 +180,13 @@ void Insert(HashTable* hashTable, std::string key, std::string value)
 
 	double loadFactor = (double)hashTable->Count / (double)hashTable->Size;
 
-	if (loadFactor > limitLoadfactor)
+	if ((std::round(loadFactor * 10.0) / 10.0) >= limitLoadFactor)
 	{
 		Rehashing(hashTable);
 	}
 }
 
-void Remove(HashTable* hashTable, std::string key)
+void RemoveInTable(HashTable* hashTable, std::string key)
 {
 	if (hashTable->Count == 0)
 	{
@@ -226,15 +253,14 @@ void Remove(HashTable* hashTable, std::string key)
 						return;
 					}
 				}
-				current = current->Next;
-				prev = current;		
+				prev = current;
+				current = current->Next;	
 			}
 		}
 	}
-
 }
 
-std::string Search(HashTable* hashTable, std::string key)
+std::string SearchInTable(HashTable* hashTable, std::string key)
 {
 	int a = FindCompire(hashTable->Size - 1);
 	int index = HashPearson(key, a, hashTable->Size - 1);
@@ -257,9 +283,9 @@ std::string Search(HashTable* hashTable, std::string key)
 	return "";
 }
 
-void PrintSearch(HashTable* hashTable, std::string key)
+void PrintSearchInTable(HashTable* hashTable, std::string key)
 {
-	std::string val = Search(hashTable, key);
+	std::string val = SearchInTable(hashTable, key);
 	if (val == "")
 	{
 		std::cout << "Key: " << key <<" does not exist\n";
@@ -299,6 +325,10 @@ void PrintTable(HashTable* hashTable)
 	std::cout << std::endl;
 }
 
+/// <summary>
+/// Удаление массива указателей.
+/// </summary>
+/// <param name="hashTable">Структура хеш-таблицы.</param>
 void DeletetOverflowBuckets(HashTable* hashTable)
 {
 	LinkedList** buckets = hashTable->OverflowBuckets;

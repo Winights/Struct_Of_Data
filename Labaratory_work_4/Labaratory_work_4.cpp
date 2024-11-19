@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "HashTable.h"
+#include "Dictionary.h"
 
 using namespace std;
 
@@ -64,7 +65,7 @@ int GetInput(const string& prompt)
 /// Получение значения от пользователя для размеров.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
-/// <returns>Положительное число</returns>
+/// <returns>Положительное число, которое > 1.</returns>
 int PositiveSize(const string& prompt)
 {
     string input;
@@ -95,7 +96,7 @@ int PositiveSize(const string& prompt)
 /// Получение значения от пользователя.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
-/// <returns>Целое число</returns>
+/// <returns>Строка</returns>
 string GetInputString(const string& prompt)
 {
     string input;
@@ -107,17 +108,19 @@ string GetInputString(const string& prompt)
 
 int main()
 {
-    int sizeOfHashTable = PositiveSize("Enter size of hash table: ");
-    HashTable* hashTable = CreateHashTable(sizeOfHashTable);
+    /*int sizeOfHashTable = PositiveSize("Enter size of hash table: ");
+    HashTable* hashTable = CreateHashTable(sizeOfHashTable);*/
+    int sizeOfDictionary = PositiveSize("Enter size of hash table: ");
+    Dictionary* dictionary = CreateDictionary(sizeOfDictionary);
 
     cout << endl;
 
     while (true)
     {
         cout << "Select the action you want to do: \n";
-        cout << "1. Insert in harsh table \n";
-        cout << "2. Search in harsh table \n";
-        cout << "3. Remove in harsh table \n";
+        cout << "1. Insert in dictionary \n";
+        cout << "2. Search in dictionary \n";
+        cout << "3. Remove in dictionary \n";
         cout << "4. Rehashing harsh table \n";
 
         int choice = GetInput("Your input: ");
@@ -130,37 +133,51 @@ int main()
 
                 string key = GetInputString("Enter the key to insert: ");
 
-                Insert(hashTable, key, value);
+                InsertInDictionary(dictionary, key, value);
                 cout << endl;
-                PrintTable(hashTable);
+                PrintDictionary(dictionary);
+
+                /*Insert(hashTable, key, value);
+                cout << endl;
+                PrintTable(hashTable);*/
                 break;
             }
             case 2:
             {
                 string key = GetInputString("Enter the key to find a element: ");
 
-                Search(hashTable, key);
+                SearchInDictionary(dictionary, key);
+                cout << endl;
+                PrintDictionary(dictionary);
+                PrintSearchInDictionary(dictionary, key);
+                cout << endl;
+                /*Search(hashTable, key);
                 cout << endl;
                 PrintTable(hashTable);
                 PrintSearch(hashTable, key);
-                cout << endl;
+                cout << endl;*/
                 break;
             }
             case 3:
             {
                 string key = GetInputString("Enter the key to remove a element: ");
-                Remove(hashTable,key);
+
+                RemoveInDictionary(dictionary, key);
+                cout << endl;
+                PrintDictionary(dictionary);
+                cout << endl;
+                /*Remove(hashTable,key);
                 cout << endl;
                 PrintTable(hashTable);
-                cout << endl;
+                cout << endl;*/
                 break;
             }
             case 4:
             {
-                Rehashing(hashTable);
+                /*Rehashing(hashTable);
                 cout << endl;
                 PrintTable(hashTable);
-                cout << endl;
+                cout << endl;*/
                 break;
             }
             default:
@@ -171,7 +188,8 @@ int main()
             }
         }
     }
-    
+   /* DeletetHashTable(hashTable);*/
+    DeletetDictionary(dictionary);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

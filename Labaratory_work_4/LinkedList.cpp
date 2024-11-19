@@ -1,4 +1,4 @@
-#include "LinkedList.h"
+﻿#include "LinkedList.h"
 #include "HashNode.h"
 
 LinkedList* CreateLinkedList()
@@ -8,7 +8,7 @@ LinkedList* CreateLinkedList()
 	return linkedList;
 }
 
-LinkedList* LinkedListInsert(LinkedList* linkedList, HashNode* hashNode)
+LinkedList* InsertInLinkedList(LinkedList* linkedList, HashNode* hashNode)
 {
 	if (!linkedList)
 	{
@@ -38,7 +38,7 @@ LinkedList* LinkedListInsert(LinkedList* linkedList, HashNode* hashNode)
 	return linkedList;
 }
 
-HashNode* LinkedListRemove(LinkedList* linkedList)
+HashNode* RemoveInLinkedList(LinkedList* linkedList)
 {
 	if (!linkedList)
 	{
