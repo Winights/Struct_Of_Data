@@ -30,15 +30,17 @@ struct HashTable
 	int Count;
 };
 
-const double limitLoadfactor = 0.8;
+const double limitLoadfactor = 0.7;
+
+const int growthFactor = 2;
 
 HashTable* CreateHashTable(int size);
 
-void Insert(HashTable* hashTable, std::string key, std::string value, int a);
+void Insert(HashTable* hashTable, std::string key, std::string value);
 
-std::string Search(HashTable* hashTable, std::string key, int a);
+std::string Search(HashTable* hashTable, std::string key);
 
-void PrintSearch(HashTable* hashTable, std::string key, int a);
+void PrintSearch(HashTable* hashTable, std::string key);
 
 void PrintTable(HashTable* hashTable);
 
@@ -48,5 +50,7 @@ int FindCompire(int size);
 
 int FindCompire(int size);
 
-void Remove(HashTable* hashTable, std::string key, int a);
+void Remove(HashTable* hashTable, std::string key);
+
+void Rehashing(HashTable* hashTable);
 

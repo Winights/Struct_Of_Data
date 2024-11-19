@@ -1,9 +1,6 @@
 #include "HashNode.h"
 #include "HashTable.h"
 #include <iostream>
-#include <algorithm>
-#include <random>
-#include <cstring>
 #include <string>
 
 LinkedList** CreateOverflowBuckets(HashTable* hashTable)
@@ -70,6 +67,36 @@ int HashPearson(std::string& key, int a, int size)
 	return abs(hashValue % size);
 }
 
+void Rehashing(HashTable* hashTable)
+{
+	HashTable* newHashTable = CreateHashTable(hashTable->Size * growthFactor);
+
+	/*PrintTable(newHashTable);*/
+
+	for (int i = 0; i < hashTable->Size; i++)
+	{
+		if (hashTable->Items[i]->Key != "" && hashTable->Items[i]->Value != "")
+		{
+			Insert(newHashTable, hashTable->Items[i]->Key, hashTable->Items[i]->Value);
+			if (hashTable->OverflowBuckets[i])
+			{
+				LinkedList* head = hashTable->OverflowBuckets[i];
+
+				while (head)
+				{
+					Insert(newHashTable, head->Node->Key, head->Node->Value);
+					head = head->Next;
+				}
+			}
+		}
+	}
+	delete[] hashTable->Items;
+	delete[] hashTable->OverflowBuckets;
+	hashTable->Items = newHashTable->Items;
+	hashTable->OverflowBuckets = newHashTable->OverflowBuckets;
+	hashTable->Size = hashTable->Size * growthFactor;
+}
+
 void HandleCollision(HashTable* hashTable, int index, HashNode* hashNode)
 {
 	LinkedList* head = hashTable->OverflowBuckets[index];
@@ -88,15 +115,17 @@ void HandleCollision(HashTable* hashTable, int index, HashNode* hashNode)
 	}
 }
 
-void Insert(HashTable* hashTable, std::string key, std::string value, int a)
+void Insert(HashTable* hashTable, std::string key, std::string value)
 {
 	if (hashTable->Count == hashTable->Size)
 	{
 		std::cout << "Hash table is full" << std::endl;
+		return;
 	}
 	HashNode* hashNode = new HashNode();
 	hashNode->Key = key;
 	hashNode->Value = value;
+	int a = FindCompire(hashTable->Size - 1);
 
 	int index = HashPearson(key, a, hashTable->Size-1);
 
@@ -109,35 +138,105 @@ void Insert(HashTable* hashTable, std::string key, std::string value, int a)
 	}
 	else
 	{
-		HandleCollision(hashTable, index, hashNode);
-		return;
-		/*if (currentNode->Key == key)
+		if (currentNode->Key == key && currentNode->Value == value)
 		{
-			hashTable->Items[index]->Value = value;
+			std::cout << std::endl;
+			std::cout << "Such a key and value are in the hash table" << std::endl;
 			return;
-		}*/
-		/*else
+		}
+		else
 		{
 			HandleCollision(hashTable, index, hashNode);
 			return;
-		}*/
+		}
 	}
 
 	double loadFactor = (double)hashTable->Count / (double)hashTable->Size;
 
 	if (loadFactor > limitLoadfactor)
 	{
-
+		Rehashing(hashTable);
 	}
 }
 
-void Remove(HashTable* hashTable, std::string key, int a)
+void Remove(HashTable* hashTable, std::string key)
 {
-	
+	if (hashTable->Count == 0)
+	{
+		std::cout << "Hash table is empty" << std::endl;
+	}
+
+	int a = FindCompire(hashTable->Size - 1);
+
+	int index = HashPearson(key, a, hashTable->Size - 1);
+
+	HashNode* currentNode = hashTable->Items[index];
+
+	LinkedList* head = hashTable->OverflowBuckets[index];
+
+	if (currentNode->Key == "" && currentNode->Value == "")
+	{
+		return;
+	}
+	else
+	{
+		if (head == NULL && currentNode->Key == key)
+		{
+			currentNode->Key = "";
+			currentNode->Value = "";
+			hashTable->Count--;
+			return;
+
+		}
+		else if (head != NULL)
+		{
+			if (currentNode->Key == key)
+			{
+				DeletetHashNode(currentNode);
+				LinkedList* node = head;
+				head = head->Next;
+				node->Next = nullptr;
+				hashTable->Items[index] = CreateHashNode();
+				hashTable->Items[index]->Key = node->Node->Key;
+				hashTable->Items[index]->Value = node->Node->Value;
+				delete node;
+				hashTable->OverflowBuckets[index] = head;
+				return;
+			}
+
+			LinkedList* current = head;
+			LinkedList* prev = nullptr;
+
+			while (current)
+			{
+				if (current->Node->Key == key)
+				{
+					if (prev == NULL)
+					{
+						DeleteLinkedList(head);
+						hashTable->OverflowBuckets[index] = NULL;
+						return;
+					}
+					else
+					{
+						prev->Next = current->Next;
+						current->Next = NULL;
+						DeleteLinkedList(current);
+						hashTable->OverflowBuckets[index] = head;
+						return;
+					}
+				}
+				current = current->Next;
+				prev = current;		
+			}
+		}
+	}
+
 }
 
-std::string Search(HashTable* hashTable, std::string key, int a)
+std::string Search(HashTable* hashTable, std::string key)
 {
+	int a = FindCompire(hashTable->Size - 1);
 	int index = HashPearson(key, a, hashTable->Size - 1);
 	HashNode* item = hashTable->Items[index];
 	LinkedList* head = hashTable->OverflowBuckets[index];
@@ -158,9 +257,9 @@ std::string Search(HashTable* hashTable, std::string key, int a)
 	return "";
 }
 
-void PrintSearch(HashTable* hashTable, std::string key, int a)
+void PrintSearch(HashTable* hashTable, std::string key)
 {
-	std::string val = Search(hashTable, key, a);
+	std::string val = Search(hashTable, key);
 	if (val == "")
 	{
 		std::cout << "Key: " << key <<" does not exist\n";
@@ -174,6 +273,7 @@ void PrintSearch(HashTable* hashTable, std::string key, int a)
 
 void PrintTable(HashTable* hashTable) 
 {
+	printf(" => Hash Table => \n");
 	for (int i = 0; i < hashTable->Size; i++) 
 	{
 		if (hashTable->Items[i]) 
@@ -189,7 +289,7 @@ void PrintTable(HashTable* hashTable)
 				
 				while (head)
 				{
-					std::cout << "Key: " << head->Node->Key << " "
+					std::cout << " " << "Key: " << head->Node->Key << " "
 						<< "Value: " << head->Node->Value << "\n";
 					head = head->Next;
 				}
@@ -222,4 +322,3 @@ void DeletetHashTable(HashTable* hashTable)
 	delete[] hashTable->Items;
 	delete hashTable;
 }
-

@@ -78,6 +78,13 @@ int PositiveSize(const string& prompt)
         cout << endl;
         return PositiveSize(prompt);
     }
+    else if (stoi(input) == 1)
+    {
+        cout << endl;
+        std::cout << "Size must be more than one." << std::endl;
+        cout << endl;
+        return PositiveSize(prompt);
+    }
     else
     {
         return stoi(input);
@@ -102,7 +109,6 @@ int main()
 {
     int sizeOfHashTable = PositiveSize("Enter size of hash table: ");
     HashTable* hashTable = CreateHashTable(sizeOfHashTable);
-    int a = FindCompire(hashTable->Size - 1);
 
     cout << endl;
 
@@ -111,6 +117,8 @@ int main()
         cout << "Select the action you want to do: \n";
         cout << "1. Insert in harsh table \n";
         cout << "2. Search in harsh table \n";
+        cout << "3. Remove in harsh table \n";
+        cout << "4. Rehashing harsh table \n";
 
         int choice = GetInput("Your input: ");
 
@@ -122,8 +130,7 @@ int main()
 
                 string key = GetInputString("Enter the key to insert: ");
 
-                Insert(hashTable,"Biba", "AA", a);
-                Insert(hashTable, key, value, a);
+                Insert(hashTable, key, value);
                 cout << endl;
                 PrintTable(hashTable);
                 break;
@@ -132,76 +139,29 @@ int main()
             {
                 string key = GetInputString("Enter the key to find a element: ");
 
-                Search(hashTable, key, a);
+                Search(hashTable, key);
                 cout << endl;
                 PrintTable(hashTable);
-                cout << endl;
-                PrintSearch(hashTable, key, a);
+                PrintSearch(hashTable, key);
                 cout << endl;
                 break;
             }
             case 3:
             {
                 string key = GetInputString("Enter the key to remove a element: ");
-                Remove(hashTable,key, a);
+                Remove(hashTable,key);
                 cout << endl;
                 PrintTable(hashTable);
                 cout << endl;
-                //int result = FindCompire(hashTable->Size-1);
-                //cout << result << endl;
-                //break;
+                break;
             }
             case 4:
             {
-           
-            }
-            case 5:
-            {
-            
-            }
-            case 6:
-            {
-           
-            }
-            case 7:
-            {
-            
-            }
-            case 8:
-            {
-            
-            }
-            case 9:
-            {
-            
-            }
-            case 10:
-            {
-            
-            }
-            case 11:
-            {
-            
-            }
-            case 12:
-            {
-            
-            }
-            case 13:
-            {
-            
-            }
-            case 14:
-            {
-            
-            }
-            case 15:
-            {
-            
-            }
-            case 16:
-            {
-               
+                Rehashing(hashTable);
+                cout << endl;
+                PrintTable(hashTable);
+                cout << endl;
+                break;
             }
             default:
             {

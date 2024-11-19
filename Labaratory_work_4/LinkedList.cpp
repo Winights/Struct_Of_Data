@@ -14,7 +14,6 @@ LinkedList* LinkedListInsert(LinkedList* linkedList, HashNode* hashNode)
 	{
 		LinkedList* head = CreateLinkedList();
 		head->Node = hashNode;
-		head->Next = nullptr;
 		linkedList = head;
 		return linkedList;
 	}
@@ -22,20 +21,18 @@ LinkedList* LinkedListInsert(LinkedList* linkedList, HashNode* hashNode)
 	{
 		LinkedList* head = CreateLinkedList();
 		head->Node = hashNode;
-		head->Next = nullptr;
 		linkedList->Next = head;
 		return linkedList;
 	}
 
 	LinkedList* temp = linkedList;
-	while (temp->Next->Next)
+	while (temp->Next)
 	{
 		temp = temp->Next;
 	}
 
 	LinkedList* newNode = CreateLinkedList();
 	newNode->Node = hashNode;
-	newNode->Next = nullptr;
 	temp->Next = newNode;
 
 	return linkedList;
