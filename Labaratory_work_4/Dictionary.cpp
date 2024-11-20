@@ -10,24 +10,24 @@ Dictionary* CreateDictionary(int size)
 	return dictionary;
 }
 
-void InsertInDictionary(Dictionary* dictionary, std::string key, std::string value)
+void InsertDictionary(Dictionary* dictionary, std::string key, std::string value)
 {
-	InsertInTable(dictionary->Table, key,value);
+	InsertHashTable(dictionary->Table, key,value);
 }
 
-void RemoveInDictionary(Dictionary* dictionary, std::string key)
+void RemoveDictionary(Dictionary* dictionary, std::string key)
 {
-	RemoveInTable(dictionary->Table, key);
+	RemoveHashTable(dictionary->Table, key);
 }
 
-std::string SearchInDictionary(Dictionary* dictionary, std::string key)
+std::string SearchDictionary(Dictionary* dictionary, std::string key)
 {
-	return SearchInTable(dictionary->Table, key);
+	return SearchHashTable(dictionary->Table, key);
 }
 
-void PrintSearchInDictionary(Dictionary* dictionary, std::string key)
+void PrintSearch(Dictionary* dictionary, std::string key)
 {
-	std::string val = SearchInDictionary(dictionary, key);
+	std::string val = SearchDictionary(dictionary, key);
 	if (val == "")
 	{
 		std::cout << "Key: " << key << " does not exist\n";

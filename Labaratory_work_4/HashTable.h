@@ -3,7 +3,6 @@
 #include "LinkedList.h"
 #include <iostream>
 
-
 /// <summary>
 /// Структура хеш-таблицы.
 /// </summary>
@@ -31,14 +30,14 @@ struct HashTable
 };
 
 /// <summary>
-/// Коэфициент заполнения.
-/// </summary>
-const double limitLoadFactor = 0.8;
-
-/// <summary>
 /// Фактор роста для хеш-таблицы.
 /// </summary>
 const int growthFactor = 2;
+
+/// <summary>
+/// Коэфициент заполнения.
+/// </summary>
+const double limitLoadFactor = 0.75;
 
 /// <summary>
 /// Создание хеш-таблицы.
@@ -53,7 +52,7 @@ HashTable* CreateHashTable(int size);
 /// <param name="hashTable">Структура хеш-таблицы.</param>
 /// <param name="key">Ключ.</param>
 /// <param name="value">Значение.</param>
-void InsertInTable(HashTable* hashTable, std::string key, std::string value);
+void InsertHashTable(HashTable* hashTable, std::string key, std::string value);
 
 /// <summary>
 /// Поиск в хеш-таблице.
@@ -61,14 +60,14 @@ void InsertInTable(HashTable* hashTable, std::string key, std::string value);
 /// <param name="hashTable">Структура хеш-таблицы.</param>
 /// <param name="key">Ключ.</param>
 /// <returns>Найденное значение, иначе пустая строка.</returns>
-std::string SearchInTable(HashTable* hashTable, std::string key);
+std::string SearchHashTable(HashTable* hashTable, std::string key);
 
 /// <summary>
 /// Удаление из хеш-таблицы.
 /// </summary>
 /// <param name="hashTable">Структура хеш-таблицы.</param>
 /// <param name="key">Ключ.</param>
-void RemoveInTable(HashTable* hashTable, std::string key);
+void RemoveHashTable(HashTable* hashTable, std::string key);
 
 /// <summary>
 /// Перешеширование хеш-таблицы.
@@ -81,7 +80,7 @@ void Rehashing(HashTable* hashTable);
 /// </summary>
 /// <param name="hashTable">Структура хеш-таблицы.</param>
 /// <param name="key">Ключ.</param>
-void PrintSearchInTable(HashTable* hashTable, std::string key);
+void PrintSearch(HashTable* hashTable, std::string key);
 
 /// <summary>
 /// Вывод хеш-таблицы.

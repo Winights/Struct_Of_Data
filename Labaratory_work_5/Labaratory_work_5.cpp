@@ -1,9 +1,9 @@
-﻿// Labaratory_work_4.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+﻿// Labaratory_work_5.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
 #include <iostream>
 #include <string>
-#include "HashTable.h"
-#include "Dictionary.h"
+#include "Tree.h"
+#include "TreeNode.h"
 
 using namespace std;
 
@@ -61,58 +61,21 @@ int GetInput(const string& prompt)
     }
 }
 
-/// <summary>
-/// Получение значения от пользователя для размеров.
-/// </summary>
-/// <param name="prompt">Введенные значения.</param>
-/// <returns>Положительное число, которое > 1.</returns>
-int PositiveSize(const string& prompt)
-{
-    string input;
-    cout << prompt;
-    cin >> input;
-
-    if (!isNumber(input) || stoi(input) <= 0)
-    {
-        cout << endl;
-        std::cout << "Size must be positive or not be zero." << std::endl;
-        cout << endl;
-        return PositiveSize(prompt);
-    }
-    else
-    {
-        return stoi(input);
-    }
-}
-
-/// <summary>
-/// Получение значения от пользователя.
-/// </summary>
-/// <param name="prompt">Введенные значения.</param>
-/// <returns>Строка</returns>
-string GetInputString(const string& prompt)
-{
-    string input;
-    cout << prompt;
-    cin >> input;
-
-    return input;
-}
-
 int main()
 {
-    int sizeOfDictionary = PositiveSize("Enter size of hash table: ");
-    Dictionary* dictionary = CreateDictionary(sizeOfDictionary);
+    int root = GetInput("Enter root for tree: ");
+    Tree* binaryTree = CreateTree(root);
 
     cout << endl;
 
     while (true)
     {
         cout << "Select the action you want to do: \n";
-        cout << "1. Insert in dictionary \n";
-        cout << "2. Search in dictionary \n";
-        cout << "3. Remove in dictionary \n";
-        cout << "4. Rehashing harsh table \n";
+        cout << "1. Insert in binary tree \n";
+        cout << "2. Search in binary tree \n";
+        cout << "3. Remove in binary tree \n";
+        cout << "4. Find min value in binary tree \n";
+        cout << "5. Find max value in binary tree \n";
 
         int choice = GetInput("Your input: ");
 
@@ -120,43 +83,56 @@ int main()
         {
             case 1:
             {
-                string value = GetInputString("Enter the value to insert: ");
-
-                string key = GetInputString("Enter the key to insert: ");
-
-                InsertDictionary(dictionary, key, value);
+                int value = GetInput("Enter value to insert: ");
+                Insert(binaryTree, value);
                 cout << endl;
-                PrintDictionary(dictionary);
+                PrintTree(binaryTree);
+                cout << endl;
                 break;
             }
             case 2:
             {
-                string key = GetInputString("Enter the key to find a element: ");
-
-                SearchDictionary(dictionary, key);
+                int value = GetInput("Enter value to insert: ");
+                TreeNode* result = Search(binaryTree, value);
+                if (result != NULL)
+                {
+                    cout << endl;
+                    cout << "Element is " << result->Value << endl;
+                    cout << endl;
+                }
+                else
+                {
+                    cout << endl;
+                    cout << "Element not found " << endl;
+                    cout << endl;
+                }
                 cout << endl;
-                PrintDictionary(dictionary);
-                PrintSearch(dictionary, key);
+                PrintTree(binaryTree);
                 cout << endl;
                 break;
             }
             case 3:
             {
-                string key = GetInputString("Enter the key to remove a element: ");
-
-                RemoveDictionary(dictionary, key);
+                int value = GetInput("Enter value to remove: ");
+                Remove(binaryTree, value);
                 cout << endl;
-                PrintDictionary(dictionary);
+                PrintTree(binaryTree);
                 cout << endl;
                 break;
             }
             case 4:
             {
-                /*Rehashing(hashTable);
+                TreeNode* minResult = FindMin(binaryTree);
                 cout << endl;
-                PrintTable(hashTable);
-                cout << endl;*/
-                break;
+                cout << "Element is " << minResult->Value << endl;
+                cout << endl;
+            }
+            case 5:
+            {
+                TreeNode* maxResult = FindMax(binaryTree);
+                cout << endl;
+                cout << "Element is " << maxResult->Value << endl;
+                cout << endl;
             }
             default:
             {
@@ -166,7 +142,7 @@ int main()
             }
         }
     }
-    DeletetDictionary(dictionary);
+    DeleteTree(binaryTree);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

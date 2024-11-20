@@ -58,7 +58,7 @@ int Gsd(int a, int b)
 /// <returns>Взаимно простое число.</returns>
 int FindCompire(int size)
 {
-	int count = 0;
+	int count = 1;
 
 	for (int i = 1; i < size; ++i)
 	{
@@ -98,14 +98,14 @@ void Rehashing(HashTable* hashTable)
 	{
 		if (hashTable->Items[i]->Key != "" && hashTable->Items[i]->Value != "")
 		{
-			InsertInTable(newHashTable, hashTable->Items[i]->Key, hashTable->Items[i]->Value);
+			InsertHashTable(newHashTable, hashTable->Items[i]->Key, hashTable->Items[i]->Value);
 			if (hashTable->OverflowBuckets[i])
 			{
 				LinkedList* head = hashTable->OverflowBuckets[i];
 
 				while (head)
 				{
-					InsertInTable(newHashTable, head->Node->Key, head->Node->Value);
+					InsertHashTable(newHashTable, head->Node->Key, head->Node->Value);
 					head = head->Next;
 				}
 			}
@@ -142,19 +142,31 @@ void HandleCollision(HashTable* hashTable, int index, HashNode* hashNode)
 	}
 }
 
-void InsertInTable(HashTable* hashTable, std::string key, std::string value)
+double LimitLoadFactor(HashTable* hashTable)
 {
-	if (hashTable->Count == hashTable->Size)
+	double result = 0.75 * hashTable->Size;
+	double integerPart;
+	double fractionalPart = modf(result, &integerPart);
+	if (fractionalPart >= 0.6)
 	{
-		std::cout << "Hash table is full" << std::endl;
-		return;
+		// Округляем вверх
+		return std::ceil(result);
 	}
+	else
+	{
+		// Округляем вниз
+		return std::floor(result);
+	}
+}
+
+void InsertHashTable(HashTable* hashTable, std::string key, std::string value)
+{
 	HashNode* hashNode = new HashNode();
 	hashNode->Key = key;
 	hashNode->Value = value;
-	int a = FindCompire(hashTable->Size - 1);
+	int a = FindCompire(hashTable->Size);
 
-	int index = HashPearson(key, a, hashTable->Size-1);
+	int index = HashPearson(key, a, hashTable->Size);
 
 	HashNode* currentNode = hashTable->Items[index];
 
@@ -177,7 +189,7 @@ void InsertInTable(HashTable* hashTable, std::string key, std::string value)
 			return;
 		}
 	}
-
+	/*double limitLoadFactor = LimitLoadFactor(hashTable)/ (double)hashTable->Size;*/
 	double loadFactor = (double)hashTable->Count / (double)hashTable->Size;
 
 	if ((std::round(loadFactor * 10.0) / 10.0) >= limitLoadFactor)
@@ -186,16 +198,16 @@ void InsertInTable(HashTable* hashTable, std::string key, std::string value)
 	}
 }
 
-void RemoveInTable(HashTable* hashTable, std::string key)
+void RemoveHashTable(HashTable* hashTable, std::string key)
 {
 	if (hashTable->Count == 0)
 	{
 		std::cout << "Hash table is empty" << std::endl;
 	}
 
-	int a = FindCompire(hashTable->Size - 1);
+	int a = FindCompire(hashTable->Size);
 
-	int index = HashPearson(key, a, hashTable->Size - 1);
+	int index = HashPearson(key, a, hashTable->Size);
 
 	HashNode* currentNode = hashTable->Items[index];
 
@@ -260,10 +272,10 @@ void RemoveInTable(HashTable* hashTable, std::string key)
 	}
 }
 
-std::string SearchInTable(HashTable* hashTable, std::string key)
+std::string SearchHashTable(HashTable* hashTable, std::string key)
 {
-	int a = FindCompire(hashTable->Size - 1);
-	int index = HashPearson(key, a, hashTable->Size - 1);
+	int a = FindCompire(hashTable->Size);
+	int index = HashPearson(key, a, hashTable->Size);
 	HashNode* item = hashTable->Items[index];
 	LinkedList* head = hashTable->OverflowBuckets[index];
 
@@ -283,9 +295,9 @@ std::string SearchInTable(HashTable* hashTable, std::string key)
 	return "";
 }
 
-void PrintSearchInTable(HashTable* hashTable, std::string key)
+void PrintSearch(HashTable* hashTable, std::string key)
 {
-	std::string val = SearchInTable(hashTable, key);
+	std::string val = SearchHashTable(hashTable, key);
 	if (val == "")
 	{
 		std::cout << "Key: " << key <<" does not exist\n";
