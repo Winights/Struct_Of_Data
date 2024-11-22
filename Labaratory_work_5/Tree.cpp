@@ -45,7 +45,7 @@ TreeNode* FindMax(Tree* binaryTree)
 /// Вывод узлов дерева.
 /// </summary>
 /// <param name="node">Структура узла.</param>
-/// <param name="node">Ширина между элементами.</param>
+/// <param name="space">Ширина между элементами.</param>
 void PrintRoots(TreeNode* node, int space) 
 {
 	if (node != nullptr) 

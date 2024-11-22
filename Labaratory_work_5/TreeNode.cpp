@@ -1,4 +1,5 @@
 ﻿#include "TreeNode.h"
+#include <iostream>
 
 TreeNode* CreateTreeNode(int value)
 {
@@ -15,6 +16,12 @@ TreeNode* InsertNode(TreeNode* node, int value)
 	if (node == nullptr)
 	{
 		node = CreateTreeNode(value);
+	}
+	else if (node->Value == value)
+	{
+		std::cout << std::endl;
+		std::cout << "This value is" << std::endl;
+		return node;
 	}
 	else if (value < node->Value)
 	{

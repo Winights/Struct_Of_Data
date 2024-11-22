@@ -177,7 +177,7 @@ void InsertHashTable(HashTable* hashTable, std::string key, std::string value)
 	}
 	else
 	{
-		if (currentNode->Key == key && currentNode->Value == value)
+		if (currentNode->Key == key)
 		{
 			std::cout << std::endl;
 			std::cout << "Such a key and value are in the table" << std::endl;

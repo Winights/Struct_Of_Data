@@ -4,6 +4,8 @@
 #include <string>
 #include "Tree.h"
 #include "TreeNode.h"
+#include "TreapNode.h"
+#include "Treap.h"
 
 using namespace std;
 
@@ -63,8 +65,11 @@ int GetInput(const string& prompt)
 
 int main()
 {
-    int root = GetInput("Enter root for tree: ");
-    Tree* binaryTree = CreateTree(root);
+    int rootBinaryTree = GetInput("Enter root for binary tree: ");
+    Tree* binaryTree = CreateTree(rootBinaryTree);
+
+    int rootTreap = GetInput("Enter root for treap: ");
+    Treap* treap = CreateTreap(rootTreap);
 
     cout << endl;
 
@@ -76,6 +81,12 @@ int main()
         cout << "3. Remove in binary tree \n";
         cout << "4. Find min value in binary tree \n";
         cout << "5. Find max value in binary tree \n";
+        cout << "6. Insert in treap \n";
+        cout << "7. Search in treap \n";
+        cout << "8. Remove in treap \n";
+        cout << "9. Insert in treap a optimized way \n";
+        cout << "10. Remove in treap a optimized way \n";
+        cout << "11. Split and merge a treap  \n";
 
         int choice = GetInput("Your input: ");
 
@@ -133,6 +144,83 @@ int main()
                 cout << endl;
                 cout << "Element is " << maxResult->Value << endl;
                 cout << endl;
+            }
+            case 6:
+            {
+                int key = GetInput("Enter key to insert: ");
+                AddTreap(treap, key);
+                cout << endl;
+                PrintTreap(treap);
+                cout << endl;
+                break;
+            }
+            case 7:
+            {
+                int key = GetInput("Enter key to insert: ");
+                TreapNode* result = SearchTreap(treap, key);
+                if (result != NULL)
+                {
+                    cout << endl;
+                    cout << "Element is " << result->Key << ":" << result->Priority << endl;
+                    cout << endl;
+                }
+                else
+                {
+                    cout << endl;
+                    cout << "Element not found " << endl;
+                    cout << endl;
+                }
+                cout << endl;
+                PrintTreap(treap);
+                cout << endl;
+                break;
+            }
+            case 8:
+            {
+                int key = GetInput("Enter key to remove: ");
+                RemoveTreap(treap, key);
+                cout << endl;
+                PrintTreap(treap);
+                cout << endl;
+                break;
+            }
+            case 9:
+            {
+                int key = GetInput("Enter key to insert: ");
+                AddTreapOptimized(treap, key);
+                cout << endl;
+                PrintTreap(treap);
+                cout << endl;
+                break;
+            }
+            case 10:
+            {
+                int key = GetInput("Enter key to remove: ");
+                RemoveTreapOptimized(treap, key);
+                cout << endl;
+                PrintTreap(treap);
+                cout << endl;
+                break;
+            }
+            case 11:
+            {
+                TreapNode* left;
+                TreapNode* right;
+                int key = GetInput("Enter key to split: ");
+                Split(treap->Root, key, left, right);
+                cout << "Split treap" << endl;
+                cout << "Left part" << endl;
+                cout << endl;
+                PrintRoots(left, 0);
+                cout << "Right part" << endl;
+                cout << endl;
+                PrintRoots(right, 0);
+                TreapNode* mergeTreapNodes = Merge(left, right);
+                cout << endl;
+                cout << "Merge treap" << endl;
+                PrintRoots(mergeTreapNodes, 0);
+                cout << endl;
+                break;
             }
             default:
             {
