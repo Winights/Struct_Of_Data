@@ -69,8 +69,8 @@ TreeNode* RemoveNode(TreeNode* node, int value)
 		{
 			TreeNode* minNode = FindMin(node->Right);
 			node->Value = minNode->Value;
-			RemoveNode(node->Right, minNode->Value);
-			return minNode;
+			node->Right = RemoveNode(node->Right, minNode->Value);
+			return node;
 		}
 	}
 }

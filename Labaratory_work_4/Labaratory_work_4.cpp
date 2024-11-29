@@ -41,7 +41,7 @@ bool isNumber(const std::string& prompt)
 /// Получение значения от пользователя.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
-/// <returns>Целое число</returns>
+/// <returns>Целое число.</returns>
 int GetInput(const string& prompt)
 {
     string input;
@@ -65,7 +65,7 @@ int GetInput(const string& prompt)
 /// Получение значения от пользователя для размеров.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
-/// <returns>Положительное число, которое > 1.</returns>
+/// <returns>Положительное число.</returns>
 int PositiveSize(const string& prompt)
 {
     string input;
@@ -89,7 +89,7 @@ int PositiveSize(const string& prompt)
 /// Получение значения от пользователя.
 /// </summary>
 /// <param name="prompt">Введенные значения.</param>
-/// <returns>Строка</returns>
+/// <returns>Строка.</returns>
 string GetInputString(const string& prompt)
 {
     string input;
@@ -152,10 +152,10 @@ int main()
             }
             case 4:
             {
-                /*Rehashing(hashTable);
+                Rehashing(dictionary->Table);
                 cout << endl;
-                PrintTable(hashTable);
-                cout << endl;*/
+                PrintDictionary(dictionary);
+                cout << endl;
                 break;
             }
             default:
